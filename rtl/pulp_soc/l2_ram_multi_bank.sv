@@ -11,7 +11,9 @@
 `include "soc_mem_map.svh"
 
 module l2_ram_multi_bank #(
+   //parameter NB_BANKS                   = 8,
    parameter NB_BANKS                   = 4,
+   //parameter int unsigned BANK_SIZE_INTL_SRAM = 65536 //Number of 32-bit words
    parameter int unsigned BANK_SIZE_INTL_SRAM = 32768 //Number of 32-bit words
 ) (
    input logic             clk_i,
@@ -20,14 +22,17 @@ module l2_ram_multi_bank #(
    input logic             test_mode_i,
    XBAR_TCDM_BUS.Slave     mem_slave[NB_BANKS],
    XBAR_TCDM_BUS.Slave     mem_pri_slave[2]
+   //XBAR_TCDM_BUS.Slave     additional_pri_slave
 );
     localparam int unsigned BANK_SIZE_PRI0       = 8192; //Number of 32-bit words
     localparam int unsigned BANK_SIZE_PRI1       = 8192; //Number of 32-bit words
+    //localparam int unsigned BANK_SIZE_PRI2       = 8192; //Number of 32-bit words
 
     //Derived parameters
     localparam int unsigned INTL_MEM_ADDR_WIDTH = $clog2(BANK_SIZE_INTL_SRAM);
     localparam int unsigned PRI0_MEM_ADDR_WIDTH = $clog2(BANK_SIZE_PRI0);
     localparam int unsigned PRI1_MEM_ADDR_WIDTH = $clog2(BANK_SIZE_PRI1);
+    //localparam int unsigned PRI2_MEM_ADDR_WIDTH = $clog2(BANK_SIZE_PRI2);
 
     //Used in testbenches
 
@@ -129,5 +134,34 @@ module l2_ram_multi_bank #(
       .rdata_o (  mem_pri_slave[1].r_rdata              )
     );
 
+    // ** Additional private bank for exercise **
+  // assign additional_pri_slave.gnt = additional_pri_slave.req;
+  // assign additional_pri_slave.r_opc = 1'b0;
+  // always_ff @(posedge clk_i, negedge rst_ni) begin
+  //     if (!rst_ni) begin
+  //         additional_pri_slave.r_valid <= 1'b0;
+  //     end else begin
+  //         additional_pri_slave.r_valid <= additional_pri_slave.req;
+  //     end
+  // end;
+  //Remove Address offset
+    //gic [31:0] pri2_address;
+    //sign pri2_address = additional_pri_slave.add - `SOC_MEM_MAP_EXERCISE_BANK_START_ADDR;
+    //
+    //_sram #(
+    //.NumWords  ( BANK_SIZE_PRI2 ),
+    //.DataWidth ( 32             ),
+    //.NumPorts  ( 1              ),
+    //.Latency   ( 1              )
+    //bank_sram_pri2_i (
+    //.clk_i,
+    //.rst_ni,
+    //.req_i   (  additional_pri_slave.req                  ),
+    //.we_i    ( ~additional_pri_slave.wen                  ),
+    //.addr_i  (  pri2_address[PRI2_MEM_ADDR_WIDTH+1:2] ), //Convert from byte to word addressing
+    //.wdata_i (  additional_pri_slave.wdata                ),
+    //.be_i    (  additional_pri_slave.be                   ),
+    //.rdata_o (  additional_pri_slave.r_rdata              )
+    //
 
 endmodule // l2_ram_multi_bank

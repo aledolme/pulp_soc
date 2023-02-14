@@ -47,10 +47,27 @@ dependencies:
   udma_hyper:             { git: "https://github.com/pulp-platform/udma_hyper.git", rev: "83ab704f9d1c5f9e5353268c901fe95c36bcea36" }
   hwpe-mac-engine:        { git: "https://github.com/pulp-platform/hwpe-mac-engine.git", version: 1.3.3 }
   riscv-dbg:              { git: "https://github.com/pulp-platform/riscv-dbg.git", version: 0.5.0 }
-  register_interface:     { git: "https://github.com/pulp-platform/register_interface.git", version: 0.3.1 }
+  register_interface:     { path: "../register_interface"} 
 
 sources:
-  # pulp_soc
+
+  # keccak ip
+  - files:
+      - rtl/keccak_ip/gen_sv/keccak_reg_pkg.sv
+      - rtl/keccak_ip/gen_sv/keccak_reg_top.sv
+      - rtl/keccak_ip/keccak_globals.vhd
+      - rtl/keccak_ip/Keccak_2to1mux.vhd
+      - rtl/keccak_ip/Keccak_REG_rst_n.vhd
+      - rtl/keccak_ip/reg_en_rst_n.vhd
+      - rtl/keccak_ip/keccak_round_constants_gen.vhd
+      - rtl/keccak_ip/keccak_round.vhd
+      - rtl/keccak_ip/keccak_buffer.vhd
+      - rtl/keccak_ip/keccak.vhd
+      - rtl/keccak_ip/keccak_cu.sv
+      - rtl/keccak_ip/keccak_top.sv
+          
+  
+ # pulp_soc
   - include_dirs:
       - rtl/include
     files:

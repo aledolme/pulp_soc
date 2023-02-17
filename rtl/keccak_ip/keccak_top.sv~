@@ -68,7 +68,9 @@ module keccak_top
         
    // wiring signals between control unit and ip
    wire logic [1599:0] din_keccak, dout_keccak;
-   assign din_keccak = reg_file_to_ip.din;
+   assign reg_file_to_ip.din = din_keccak;
+   assign ip_to_reg_file.dout = dout_keccak;
+   
 			       			        	
 	keccak i_keccak (
 		.clk(clk_i),
@@ -79,6 +81,4 @@ module keccak_top
 		.status(ip_to_reg_file.status)
 	);
 
-  assign ip_to_reg_file.dout = dout_keccak;
-  
 endmodule : keccak_top

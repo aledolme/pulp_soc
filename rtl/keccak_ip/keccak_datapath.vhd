@@ -9,6 +9,13 @@
 -- and related or neighboring rights to the source code in this file.
 -- http://creativecommons.org/publicdomain/zero/1.0/
 
+
+--
+-- keccak_datapath: datapath of keccak core.  
+-- Modified by Alessandra Dolmeta, Mattia Mirigaldi
+-- alessandra.dolmeta@polito.it, mattiamirigaldi.98017@gmail.com
+--
+
 library work;
 use work.keccak_globals.all;
 
@@ -152,10 +159,6 @@ begin  -- Rtl
         end if;
     end process p_main;
 
-    --input mapping
-
-
-    --capacity part
 
 
     
@@ -169,4 +172,5 @@ begin  -- Rtl
     end generate;
 
     ready_o<=permutation_computed;
+
 end rtl;

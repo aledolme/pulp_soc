@@ -1,3 +1,12 @@
+
+--
+-- keccak: core of the accelerator. Here, control unit and datapath are instantiated. 
+-- Designed by Alessandra Dolmeta, Mattia Mirigaldi
+-- alessandra.dolmeta@polito.it, mattiamirigaldi.98017@gmail.com
+--
+
+
+
 library work;
 use work.keccak_globals.all;
 

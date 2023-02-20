@@ -1,3 +1,10 @@
+//
+// keccak_cu: keccak control-unit. 
+// Designed by Alessandra Dolmeta, Mattia Mirigaldi
+// alessandra.dolmeta@polito.it, mattiamirigaldi.98017@gmail.com
+//
+
+
 module keccak_cu (
      input logic 		       clk_i,
      input logic 		       rst_ni,

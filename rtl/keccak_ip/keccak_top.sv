@@ -1,3 +1,10 @@
+//
+// keccak_top: keccak accelerator top-level. 
+// Designed by Alessandra Dolmeta, Mattia Mirigaldi
+// alessandra.dolmeta@polito.it, mattiamirigaldi.98017@gmail.com
+//
+
+
 `include "/register_interface/typedef.svh"
 `include "/register_interface/assign.svh"
 

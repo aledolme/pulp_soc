@@ -9,7 +9,6 @@ package ntt_intt_pwm_reg_pkg;
   // Param list
   parameter int DIN = 1;
   parameter int DOUT = 1;
-  parameter int CTRL = 1;
 
   ////////////////////////////
   // Typedefs for registers //
@@ -59,7 +58,7 @@ package ntt_intt_pwm_reg_pkg;
       logic        q;
       logic        qe;
     } start_intt;
-  } ntt_intt_pwm_reg2hw_ctrl_mreg_t;
+  } ntt_intt_pwm_reg2hw_ctrl_reg_t;
 
 
   typedef struct packed {
@@ -76,7 +75,7 @@ package ntt_intt_pwm_reg_pkg;
   ///////////////////////////////////////
   typedef struct packed {
     ntt_intt_pwm_reg2hw_din_mreg_t [0:0] din; // [52:21]
-    ntt_intt_pwm_reg2hw_ctrl_mreg_t [0:0] ctrl; // [20:1]
+    ntt_intt_pwm_reg2hw_ctrl_reg_t ctrl; // [20:1]
   } ntt_intt_pwm_reg2hw_t;
 
   ///////////////////////////////////////

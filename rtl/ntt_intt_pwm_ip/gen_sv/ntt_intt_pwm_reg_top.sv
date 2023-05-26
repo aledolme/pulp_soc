@@ -68,26 +68,26 @@ module ntt_intt_pwm_reg_top #(
   logic din_we;
   logic [31:0] dout_qs;
   logic dout_re;
-  logic ctrl_load_a_f_0_wd;
-  logic ctrl_load_a_f_0_we;
-  logic ctrl_load_a_i_0_wd;
-  logic ctrl_load_a_i_0_we;
-  logic ctrl_load_b_f_0_wd;
-  logic ctrl_load_b_f_0_we;
-  logic ctrl_load_b_i_0_wd;
-  logic ctrl_load_b_i_0_we;
-  logic ctrl_read_a_0_wd;
-  logic ctrl_read_a_0_we;
-  logic ctrl_read_b_0_wd;
-  logic ctrl_read_b_0_we;
-  logic ctrl_start_ab_0_wd;
-  logic ctrl_start_ab_0_we;
-  logic ctrl_start_ntt_0_wd;
-  logic ctrl_start_ntt_0_we;
-  logic ctrl_start_pwm_0_wd;
-  logic ctrl_start_pwm_0_we;
-  logic ctrl_start_intt_0_wd;
-  logic ctrl_start_intt_0_we;
+  logic ctrl_load_a_f_wd;
+  logic ctrl_load_a_f_we;
+  logic ctrl_load_a_i_wd;
+  logic ctrl_load_a_i_we;
+  logic ctrl_load_b_f_wd;
+  logic ctrl_load_b_f_we;
+  logic ctrl_load_b_i_wd;
+  logic ctrl_load_b_i_we;
+  logic ctrl_read_a_wd;
+  logic ctrl_read_a_we;
+  logic ctrl_read_b_wd;
+  logic ctrl_read_b_we;
+  logic ctrl_start_ab_wd;
+  logic ctrl_start_ab_we;
+  logic ctrl_start_ntt_wd;
+  logic ctrl_start_ntt_we;
+  logic ctrl_start_pwm_wd;
+  logic ctrl_start_pwm_we;
+  logic ctrl_start_intt_wd;
+  logic ctrl_start_intt_we;
   logic status_qs;
   logic status_re;
 
@@ -138,159 +138,156 @@ module ntt_intt_pwm_reg_top #(
   );
 
 
-
-  // Subregister 0 of Multireg ctrl
   // R[ctrl]: V(True)
 
-  // F[load_a_f_0]: 0:0
+  //   F[load_a_f]: 0:0
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_load_a_f_0 (
+  ) u_ctrl_load_a_f (
     .re     (1'b0),
-    .we     (ctrl_load_a_f_0_we),
-    .wd     (ctrl_load_a_f_0_wd),
+    .we     (ctrl_load_a_f_we),
+    .wd     (ctrl_load_a_f_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].load_a_f.qe),
-    .q      (reg2hw.ctrl[0].load_a_f.q ),
+    .qe     (reg2hw.ctrl.load_a_f.qe),
+    .q      (reg2hw.ctrl.load_a_f.q ),
     .qs     ()
   );
 
 
-  // F[load_a_i_0]: 1:1
+  //   F[load_a_i]: 1:1
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_load_a_i_0 (
+  ) u_ctrl_load_a_i (
     .re     (1'b0),
-    .we     (ctrl_load_a_i_0_we),
-    .wd     (ctrl_load_a_i_0_wd),
+    .we     (ctrl_load_a_i_we),
+    .wd     (ctrl_load_a_i_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].load_a_i.qe),
-    .q      (reg2hw.ctrl[0].load_a_i.q ),
+    .qe     (reg2hw.ctrl.load_a_i.qe),
+    .q      (reg2hw.ctrl.load_a_i.q ),
     .qs     ()
   );
 
 
-  // F[load_b_f_0]: 2:2
+  //   F[load_b_f]: 2:2
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_load_b_f_0 (
+  ) u_ctrl_load_b_f (
     .re     (1'b0),
-    .we     (ctrl_load_b_f_0_we),
-    .wd     (ctrl_load_b_f_0_wd),
+    .we     (ctrl_load_b_f_we),
+    .wd     (ctrl_load_b_f_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].load_b_f.qe),
-    .q      (reg2hw.ctrl[0].load_b_f.q ),
+    .qe     (reg2hw.ctrl.load_b_f.qe),
+    .q      (reg2hw.ctrl.load_b_f.q ),
     .qs     ()
   );
 
 
-  // F[load_b_i_0]: 3:3
+  //   F[load_b_i]: 3:3
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_load_b_i_0 (
+  ) u_ctrl_load_b_i (
     .re     (1'b0),
-    .we     (ctrl_load_b_i_0_we),
-    .wd     (ctrl_load_b_i_0_wd),
+    .we     (ctrl_load_b_i_we),
+    .wd     (ctrl_load_b_i_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].load_b_i.qe),
-    .q      (reg2hw.ctrl[0].load_b_i.q ),
+    .qe     (reg2hw.ctrl.load_b_i.qe),
+    .q      (reg2hw.ctrl.load_b_i.q ),
     .qs     ()
   );
 
 
-  // F[read_a_0]: 4:4
+  //   F[read_a]: 4:4
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_read_a_0 (
+  ) u_ctrl_read_a (
     .re     (1'b0),
-    .we     (ctrl_read_a_0_we),
-    .wd     (ctrl_read_a_0_wd),
+    .we     (ctrl_read_a_we),
+    .wd     (ctrl_read_a_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].read_a.qe),
-    .q      (reg2hw.ctrl[0].read_a.q ),
+    .qe     (reg2hw.ctrl.read_a.qe),
+    .q      (reg2hw.ctrl.read_a.q ),
     .qs     ()
   );
 
 
-  // F[read_b_0]: 5:5
+  //   F[read_b]: 5:5
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_read_b_0 (
+  ) u_ctrl_read_b (
     .re     (1'b0),
-    .we     (ctrl_read_b_0_we),
-    .wd     (ctrl_read_b_0_wd),
+    .we     (ctrl_read_b_we),
+    .wd     (ctrl_read_b_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].read_b.qe),
-    .q      (reg2hw.ctrl[0].read_b.q ),
+    .qe     (reg2hw.ctrl.read_b.qe),
+    .q      (reg2hw.ctrl.read_b.q ),
     .qs     ()
   );
 
 
-  // F[start_ab_0]: 6:6
+  //   F[start_ab]: 6:6
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_start_ab_0 (
+  ) u_ctrl_start_ab (
     .re     (1'b0),
-    .we     (ctrl_start_ab_0_we),
-    .wd     (ctrl_start_ab_0_wd),
+    .we     (ctrl_start_ab_we),
+    .wd     (ctrl_start_ab_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].start_ab.qe),
-    .q      (reg2hw.ctrl[0].start_ab.q ),
+    .qe     (reg2hw.ctrl.start_ab.qe),
+    .q      (reg2hw.ctrl.start_ab.q ),
     .qs     ()
   );
 
 
-  // F[start_ntt_0]: 7:7
+  //   F[start_ntt]: 7:7
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_start_ntt_0 (
+  ) u_ctrl_start_ntt (
     .re     (1'b0),
-    .we     (ctrl_start_ntt_0_we),
-    .wd     (ctrl_start_ntt_0_wd),
+    .we     (ctrl_start_ntt_we),
+    .wd     (ctrl_start_ntt_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].start_ntt.qe),
-    .q      (reg2hw.ctrl[0].start_ntt.q ),
+    .qe     (reg2hw.ctrl.start_ntt.qe),
+    .q      (reg2hw.ctrl.start_ntt.q ),
     .qs     ()
   );
 
 
-  // F[start_pwm_0]: 8:8
+  //   F[start_pwm]: 8:8
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_start_pwm_0 (
+  ) u_ctrl_start_pwm (
     .re     (1'b0),
-    .we     (ctrl_start_pwm_0_we),
-    .wd     (ctrl_start_pwm_0_wd),
+    .we     (ctrl_start_pwm_we),
+    .wd     (ctrl_start_pwm_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].start_pwm.qe),
-    .q      (reg2hw.ctrl[0].start_pwm.q ),
+    .qe     (reg2hw.ctrl.start_pwm.qe),
+    .q      (reg2hw.ctrl.start_pwm.q ),
     .qs     ()
   );
 
 
-  // F[start_intt_0]: 9:9
+  //   F[start_intt]: 9:9
   prim_subreg_ext #(
     .DW    (1)
-  ) u_ctrl_start_intt_0 (
+  ) u_ctrl_start_intt (
     .re     (1'b0),
-    .we     (ctrl_start_intt_0_we),
-    .wd     (ctrl_start_intt_0_wd),
+    .we     (ctrl_start_intt_we),
+    .wd     (ctrl_start_intt_wd),
     .d      ('0),
     .qre    (),
-    .qe     (reg2hw.ctrl[0].start_intt.qe),
-    .q      (reg2hw.ctrl[0].start_intt.q ),
+    .qe     (reg2hw.ctrl.start_intt.qe),
+    .q      (reg2hw.ctrl.start_intt.q ),
     .qs     ()
   );
-
 
 
   // R[status]: V(True)
@@ -336,35 +333,35 @@ module ntt_intt_pwm_reg_top #(
 
   assign dout_re = addr_hit[1] && reg_re;
 
-  assign ctrl_load_a_f_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_load_a_f_0_wd = reg_wdata[0];
+  assign ctrl_load_a_f_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_load_a_f_wd = reg_wdata[0];
 
-  assign ctrl_load_a_i_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_load_a_i_0_wd = reg_wdata[1];
+  assign ctrl_load_a_i_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_load_a_i_wd = reg_wdata[1];
 
-  assign ctrl_load_b_f_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_load_b_f_0_wd = reg_wdata[2];
+  assign ctrl_load_b_f_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_load_b_f_wd = reg_wdata[2];
 
-  assign ctrl_load_b_i_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_load_b_i_0_wd = reg_wdata[3];
+  assign ctrl_load_b_i_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_load_b_i_wd = reg_wdata[3];
 
-  assign ctrl_read_a_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_read_a_0_wd = reg_wdata[4];
+  assign ctrl_read_a_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_read_a_wd = reg_wdata[4];
 
-  assign ctrl_read_b_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_read_b_0_wd = reg_wdata[5];
+  assign ctrl_read_b_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_read_b_wd = reg_wdata[5];
 
-  assign ctrl_start_ab_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_start_ab_0_wd = reg_wdata[6];
+  assign ctrl_start_ab_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_start_ab_wd = reg_wdata[6];
 
-  assign ctrl_start_ntt_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_start_ntt_0_wd = reg_wdata[7];
+  assign ctrl_start_ntt_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_start_ntt_wd = reg_wdata[7];
 
-  assign ctrl_start_pwm_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_start_pwm_0_wd = reg_wdata[8];
+  assign ctrl_start_pwm_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_start_pwm_wd = reg_wdata[8];
 
-  assign ctrl_start_intt_0_we = addr_hit[2] & reg_we & ~wr_err;
-  assign ctrl_start_intt_0_wd = reg_wdata[9];
+  assign ctrl_start_intt_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_start_intt_wd = reg_wdata[9];
 
   assign status_re = addr_hit[3] && reg_re;
 

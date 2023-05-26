@@ -93,6 +93,6 @@ module ntt_intt_pwm
 		.done(ip_to_reg_file.status)
 	);
 
-  assign ip_to_reg_file.dout = dout_keccak;
+  assign ip_to_reg_file.dout = dout_ntt_intt_pwm;
   
 endmodule : ntt_intt_pwm

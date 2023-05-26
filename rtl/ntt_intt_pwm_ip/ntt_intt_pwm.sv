@@ -77,7 +77,7 @@ module ntt_intt_pwm
    wire logic [63:0] din_ntt_intt_pwm, dout_ntt_intt_pwm;
    assign din_ntt_intt_pwm = reg_file_to_ip.din;
 			       			        	
-	ntt_intt_pwm i_ntt_intt_top (
+	ntt_intt_top i_ntt_intt_top (
 		.clk(clk_i),
 		.rst(rst_ni),
 		.load_a_f(reg_file_to_ip.ctrl.load_a_f.q),

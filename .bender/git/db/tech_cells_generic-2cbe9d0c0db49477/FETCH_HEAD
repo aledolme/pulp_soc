@@ -1,3 +1,17 @@
+ef99266fb0c58f897d2ff9237f45cf2df98d8def	not-for-merge	branch 'add_clk_OR2' of https://github.com/pulp-platform/tech_cells_generic
+2d4030b502fd5e05d3d6d64ecdff4defcc09fd21	not-for-merge	branch 'bender-patch-fpga' of https://github.com/pulp-platform/tech_cells_generic
+bc74aa5b1383660c95e90a0800abb545e917a5f1	not-for-merge	branch 'bender-synth-fix' of https://github.com/pulp-platform/tech_cells_generic
+46f5584b0b81be9d9736ff3be3cb5c2c593763a4	not-for-merge	branch 'disable_init' of https://github.com/pulp-platform/tech_cells_generic
+d630579ee989bcef62414373fca3a4854e504bbb	not-for-merge	branch 'feature/tc_sram_impl' of https://github.com/pulp-platform/tech_cells_generic
+86188d33d0204aa8b3079b33f7e15abfdb0b4272	not-for-merge	branch 'features/snitch' of https://github.com/pulp-platform/tech_cells_generic
+0fee529f0e39d7ca0ec6076029ef996cd2e26cb3	not-for-merge	branch 'fix_bender_targets' of https://github.com/pulp-platform/tech_cells_generic
+e0447821bf690fcabbc9fcf0794c19d30b56922e	not-for-merge	branch 'fix_missing_legacy_file' of https://github.com/pulp-platform/tech_cells_generic
+2cf66b7ed589954bcf90fd9c883053264d7aefb6	not-for-merge	branch 'fpga' of https://github.com/pulp-platform/tech_cells_generic
+313ffafcfb65d7ca80a1c046bf5730848809ef81	not-for-merge	branch 'gwt' of https://github.com/pulp-platform/tech_cells_generic
+a9cae21902e75b1434328ecf36f85327ba5717de	not-for-merge	branch 'master' of https://github.com/pulp-platform/tech_cells_generic
+5912352c9a9461de64e93355436f8efe3b6bc310	not-for-merge	branch 'mattia_s' of https://github.com/pulp-platform/tech_cells_generic
+e03526018b5e3ce41591514e2e5b61ca2b94d14f	not-for-merge	branch 'siracusa' of https://github.com/pulp-platform/tech_cells_generic
+82de1055df313e25596b116e437b8eb657f368fb	not-for-merge	branch 'verilator' of https://github.com/pulp-platform/tech_cells_generic
 bccdf7bf4d813b12f66fcc18b45300759c7e0fea	not-for-merge	tag 'gwt_v0.1.11' of https://github.com/pulp-platform/tech_cells_generic
 5872932739d21f486c5206c8fcb436ef4c563470	not-for-merge	tag 'pulpissimo-v1.0' of https://github.com/pulp-platform/tech_cells_generic
 04b7b2735d42e4715c1bc9227027a3d8fb770c08	not-for-merge	tag 'v.0.1.16' of https://github.com/pulp-platform/tech_cells_generic

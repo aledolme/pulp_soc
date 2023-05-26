@@ -1,3 +1,11 @@
+44bc0d4b01326540378f307f2c010f3463c0b3bb	not-for-merge	branch 'control-pulp' of https://github.com/pulp-platform/udma_qspi
+ddbe8a2e530a5edafc93fe1a25f47fb4b8716bd8	not-for-merge	branch 'master' of https://github.com/pulp-platform/udma_qspi
+3d6f5f061c5ce37dae249fd0a67f9737c2c7529d	not-for-merge	branch 'newcmdif' of https://github.com/pulp-platform/udma_qspi
+61405290a749240988a8b7629d8ae00dfbbe02f9	not-for-merge	branch 'newrptbuff' of https://github.com/pulp-platform/udma_qspi
+37e1fa3bd845aa9345073edb908584f99dfc0bb7	not-for-merge	branch 'newtxrx' of https://github.com/pulp-platform/udma_qspi
+ec08ef33e23e7bf10621b6a744bc1e37b7ae3946	not-for-merge	branch 'rc' of https://github.com/pulp-platform/udma_qspi
+ed883d45f0f60a43bb784614868ca12f835457aa	not-for-merge	branch 'remove-jg-config' of https://github.com/pulp-platform/udma_qspi
+04874baa0c9a83cb15f1dca67f1e8a4de65af660	not-for-merge	branch 'v2.0.0-draft' of https://github.com/pulp-platform/udma_qspi
 697f6b91bd6a7698a15d77355e882bd5cdfa8b52	not-for-merge	tag 'newtxrx_v1.0.0' of https://github.com/pulp-platform/udma_qspi
 6ada98ec899d725eeac8929ea0c9c6e00d527f7d	not-for-merge	tag 'newtxrx_v1.0.1' of https://github.com/pulp-platform/udma_qspi
 fe436be3d2cce533db6b0a913a7983cd0ae4c6a8	not-for-merge	tag 'newtxrx_v1.1.0' of https://github.com/pulp-platform/udma_qspi

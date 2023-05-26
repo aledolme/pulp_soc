@@ -75,8 +75,8 @@ packages:
     dependencies:
       - common_cells
   common_cells:
-    revision: 4dc9413990622dcbf4b37a19f792834c800da5c7
-    version: 1.28.0
+    revision: 4ac82b420e46fd0005513ca2283cb3c905e7599a
+    version: 1.29.0
     source:
       Git: "https://github.com/pulp-platform/common_cells.git"
     dependencies:
@@ -176,8 +176,8 @@ packages:
       - common_cells
       - tech_cells_generic
   scm:
-    revision: e1ad7dffd9d8702430131ec8bc1a0d9ff686ece2
-    version: 1.1.0
+    revision: 998466d2a3c2d7d572e43d2666d93c4f767d8d60
+    version: 1.1.1
     source:
       Git: "https://github.com/pulp-platform/scm.git"
     dependencies: []
@@ -189,8 +189,8 @@ packages:
     dependencies:
       - common_verification
   timer_unit:
-    revision: 3f4ee3e5b3875a473242de5d0c3ebb5a0fe4b8db
-    version: 1.0.2
+    revision: 4c69615c89db9397a9747d6f6d6a36727854f0bc
+    version: 1.0.3
     source:
       Git: "https://github.com/pulp-platform/timer_unit.git"
     dependencies: []

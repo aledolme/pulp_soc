@@ -885,11 +885,11 @@ module pulp_soc import dm::*; #(
 		.axi_slave(s_keccak_bus)	
 		);
 
-    ntt_intt_pwm_top #(
+    ntt_intt_pwm #(
 		.AXI_ADDR_WIDTH(AXI_ADDR_WIDTH),
 		.AXI_ID_WIDTH(AXI_ID_OUT_WIDTH),
 		.AXI_USER_WIDTH(AXI_USER_WIDTH)
-		) i_ntt_intt_pwm_top (
+		) i_ntt_intt_pwm (
 		.clk_i(s_soc_clk),
 		.rst_ni(s_soc_rstn),
 		.test_mode_i(dft_test_mode_i),

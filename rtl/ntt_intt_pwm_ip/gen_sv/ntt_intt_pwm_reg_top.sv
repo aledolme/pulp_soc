@@ -149,10 +149,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_load_a_f_0_we),
     .wd     (ctrl_load_a_f_0_wd),
-    .d      (hw2reg.ctrl[0].load_a_f.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].load_a_f.qe),
+    .q      (reg2hw.ctrl[0].load_a_f.q ),
     .qs     ()
   );
 
@@ -164,10 +164,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_load_a_i_0_we),
     .wd     (ctrl_load_a_i_0_wd),
-    .d      (hw2reg.ctrl[0].load_a_i.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].load_a_i.qe),
+    .q      (reg2hw.ctrl[0].load_a_i.q ),
     .qs     ()
   );
 
@@ -179,10 +179,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_load_b_f_0_we),
     .wd     (ctrl_load_b_f_0_wd),
-    .d      (hw2reg.ctrl[0].load_b_f.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].load_b_f.qe),
+    .q      (reg2hw.ctrl[0].load_b_f.q ),
     .qs     ()
   );
 
@@ -194,10 +194,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_load_b_i_0_we),
     .wd     (ctrl_load_b_i_0_wd),
-    .d      (hw2reg.ctrl[0].load_b_i.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].load_b_i.qe),
+    .q      (reg2hw.ctrl[0].load_b_i.q ),
     .qs     ()
   );
 
@@ -209,10 +209,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_read_a_0_we),
     .wd     (ctrl_read_a_0_wd),
-    .d      (hw2reg.ctrl[0].read_a.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].read_a.qe),
+    .q      (reg2hw.ctrl[0].read_a.q ),
     .qs     ()
   );
 
@@ -224,10 +224,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_read_b_0_we),
     .wd     (ctrl_read_b_0_wd),
-    .d      (hw2reg.ctrl[0].read_b.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].read_b.qe),
+    .q      (reg2hw.ctrl[0].read_b.q ),
     .qs     ()
   );
 
@@ -239,10 +239,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_start_ab_0_we),
     .wd     (ctrl_start_ab_0_wd),
-    .d      (hw2reg.ctrl[0].start_ab.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].start_ab.qe),
+    .q      (reg2hw.ctrl[0].start_ab.q ),
     .qs     ()
   );
 
@@ -254,10 +254,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_start_ntt_0_we),
     .wd     (ctrl_start_ntt_0_wd),
-    .d      (hw2reg.ctrl[0].start_ntt.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].start_ntt.qe),
+    .q      (reg2hw.ctrl[0].start_ntt.q ),
     .qs     ()
   );
 
@@ -269,10 +269,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_start_pwm_0_we),
     .wd     (ctrl_start_pwm_0_wd),
-    .d      (hw2reg.ctrl[0].start_pwm.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].start_pwm.qe),
+    .q      (reg2hw.ctrl[0].start_pwm.q ),
     .qs     ()
   );
 
@@ -284,10 +284,10 @@ module ntt_intt_pwm_reg_top #(
     .re     (1'b0),
     .we     (ctrl_start_intt_0_we),
     .wd     (ctrl_start_intt_0_wd),
-    .d      (hw2reg.ctrl[0].start_intt.d),
+    .d      ('0),
     .qre    (),
-    .qe     (),
-    .q      (),
+    .qe     (reg2hw.ctrl[0].start_intt.qe),
+    .q      (reg2hw.ctrl[0].start_intt.q ),
     .qs     ()
   );
 

@@ -36,10 +36,10 @@
 		{ multireg:
           { name: "CTRL",
             desc: "Controls signals of ntt_intt_pwm",
-            count: "1",
             cname: "ctrl",
+			count: "1",
             swaccess: "wo",
-            hwaccess: "hwo",
+            hwaccess: "hro",
             hwext: "true",
             fields: [
                 { bits: "0", name: "load_a_f",

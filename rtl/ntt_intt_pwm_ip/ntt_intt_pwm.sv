@@ -95,4 +95,4 @@ module ntt_intt_pwm
 
   assign ip_to_reg_file.dout = dout_keccak;
   
-endmodule : ntt_intt_pwm_top
+endmodule : ntt_intt_pwm

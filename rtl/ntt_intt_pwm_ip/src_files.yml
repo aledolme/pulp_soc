@@ -19,11 +19,10 @@ false_adder:
       - modmul.vhd
       - modsub.vhd
       - montgomery.vhd
-      - ntt_intt.vhd
-      - ntt_intt_top.vhd
+      - ntt_intt_pwm.vhd
       - param.vhd
       - reg_rst.vhd
       - shiftreg.vhd
-      - ntt_intt_pwm.sv
+      - ntt_intt_pwm_top.sv
   vlog_opts:
     - -L register_interface_lib

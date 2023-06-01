@@ -76,10 +76,12 @@ module ntt_intt_pwm_top
    // wiring signals between control unit and ip
    wire logic [15:0] din_ntt_intt_pwm, dout_ntt_intt_pwm;
    assign din_ntt_intt_pwm = reg_file_to_ip.din;
-			       			        	
+  
+   assign reset_neg = ~rst_ni;
+		       			        	
 	ntt_intt_pwm i_ntt_intt_pwm (
 		.clk(clk_i),
-		.rst(rst_ni),
+		.rst(reset_neg),
 		.load_a_f(reg_file_to_ip.ctrl.load_a_f.q),
 		.load_a_i(reg_file_to_ip.ctrl.load_a_i.q),
 		.read_a(reg_file_to_ip.ctrl.read_a.q),

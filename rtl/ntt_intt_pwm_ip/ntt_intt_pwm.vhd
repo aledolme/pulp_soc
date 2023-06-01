@@ -102,6 +102,7 @@ architecture RTL of ntt_intt_pwm is
 
     -------------SIGNALS---------------------------------------------------
     TYPE state IS (IDLE, LOAD, FNTT, INTT, PWM2, READ);
+	signal rst_ni: std_logic;
     signal y: state;
 
     signal din_cnt : unsigned(7 downto 0);    --counter for OP_LOAD_DATA/B state
@@ -151,11 +152,11 @@ architecture RTL of ntt_intt_pwm is
 
 begin
 
-
+	rst_ni <= not(rst);
     --FSM----------------------------------------------------------------
     ntt_intt_FSM: process (clk, rst)
     begin  -- process
-        if rst = '1' then -- asynchronous reset (active high)
+        if rst_ni = '0' then -- asynchronous reset (active low)
 
             y <= IDLE;
             PWM_TW <= '0';
@@ -216,9 +217,9 @@ begin
     end process;
 
     ---ntt_intt processes----------------------------------------------------------
-    ntt_intt_1: process (clk, rst)
+    ntt_intt_1: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             load_type <= '0';
         elsif clk'event and clk = '1' then
             if load_a_i = '1' or load_b_i = '1' then
@@ -231,9 +232,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_2: process (clk, rst)
+    ntt_intt_2: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             op_out_a <= '0';
         elsif clk'event and clk = '1' then
             if start_fntt = '1' and start_ab = '0' then
@@ -248,9 +249,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_3: process (clk, rst)
+    ntt_intt_3: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             op_out_b <= '0';
         elsif clk'event and clk = '1' then
             if start_fntt = '1' and start_ab = '1' then
@@ -265,9 +266,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_4: process (clk, rst)
+    ntt_intt_4: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             load_ab <= '0';
             read_ab <= '0';
             exec_ab <= '0';
@@ -304,9 +305,9 @@ begin
 
     end process;
 
-    ntt_intt_5: process (clk, rst)
+    ntt_intt_5: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             din_cnt <= (others=>'0');
             dout_cnt <= (others=>'0');
             op_cnt <= (others=>'0');
@@ -352,9 +353,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_6: process (clk, rst)
+    ntt_intt_6: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             t_r <= (others=>'0');
         elsif clk'event and clk = '1' then
             t_r <= raddr_tw;
@@ -446,7 +447,7 @@ begin
 
             when PWM2 =>
                 if c_loop_pwm(0) = '1' then
-                    --write to first BRAM
+                    --write to first_ni BRAM
                     di2_0 <= E;
                     di2_1 <= E;
                     dw2_0 <= waddr1;
@@ -580,9 +581,9 @@ begin
     di1_0 <= di2_0;
     di1_1 <= di2_1;
 
-    ntt_intt9: process(clk, rst)
+    ntt_intt9: process(clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             A   <= (others=>'0');
             B   <= (others=>'0');
             W   <= (others=>'0');
@@ -660,9 +661,9 @@ begin
         end if;
     end process;
     
-    ntt_intt_10: process (clk, rst)
+    ntt_intt_10: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             done <= '0';
         elsif clk'event and clk = '1' then
             case y is
@@ -735,7 +736,7 @@ begin
     modmul_module: modmul
         port map(
             clk         => clk,
-            rst         => rst,
+            rst         => rst_ni,
             mod_mul_sel => '0',
             mod_mul_A   => barrett_mux_out,
             mod_mul_B   => MONT_std,
@@ -766,9 +767,9 @@ begin
     
     
     
-   ntt_intt_11: process (clk, rst)
+   ntt_intt_11: process (clk, rst_ni)
     begin
-        if (rst = '1') then
+        if (rst_ni = '1') then
             dout <= (others=>'0');
         elsif clk'event and clk = '1' then
             if y=READ then
@@ -786,7 +787,7 @@ begin
     --------instantiations----------------------------------------------------------
     ntt_intt_ag: address_generator
         port map(
-            rst             => rst,
+            rst             => rst_ni,
             clk             => clk,
             start_fntt      => start_fntt,
             start_pwm2      => start_pwm2,
@@ -862,7 +863,7 @@ begin
     ntt_intt_bu: butterfly
         port map(
             clk => clk,
-            rst => rst,
+            rst => rst_ni,
             CT  => CT,
             PWM => PWM,
             OP_SEL => op_selector,

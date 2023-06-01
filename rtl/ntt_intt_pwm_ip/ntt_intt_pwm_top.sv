@@ -77,7 +77,7 @@ module ntt_intt_pwm_top
    wire logic [15:0] din_ntt_intt_pwm, dout_ntt_intt_pwm;
    assign din_ntt_intt_pwm = reg_file_to_ip.din;
   
-   assign reset_neg = ~rst_ni;
+   assign reset_neg = !rst_ni;
 		       			        	
 	ntt_intt_pwm i_ntt_intt_pwm (
 		.clk(clk_i),

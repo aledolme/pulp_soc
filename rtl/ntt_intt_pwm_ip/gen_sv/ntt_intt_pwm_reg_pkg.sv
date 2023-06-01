@@ -14,7 +14,7 @@ package ntt_intt_pwm_reg_pkg;
   // Typedefs for registers //
   ////////////////////////////
   typedef struct packed {
-    logic [16:0] q;
+    logic [15:0] q;
   } ntt_intt_pwm_reg2hw_din_mreg_t;
 
   typedef struct packed {
@@ -62,7 +62,7 @@ package ntt_intt_pwm_reg_pkg;
 
 
   typedef struct packed {
-    logic [16:0] d;
+    logic [15:0] d;
   } ntt_intt_pwm_hw2reg_dout_mreg_t;
 
   typedef struct packed {
@@ -74,7 +74,7 @@ package ntt_intt_pwm_reg_pkg;
   // Register to internal design logic //
   ///////////////////////////////////////
   typedef struct packed {
-    ntt_intt_pwm_reg2hw_din_mreg_t [0:0] din; // [37:21]
+    ntt_intt_pwm_reg2hw_din_mreg_t [0:0] din; // [36:21]
     ntt_intt_pwm_reg2hw_ctrl_reg_t ctrl; // [20:1]
   } ntt_intt_pwm_reg2hw_t;
 
@@ -82,7 +82,7 @@ package ntt_intt_pwm_reg_pkg;
   // Internal design logic to register //
   ///////////////////////////////////////
   typedef struct packed {
-    ntt_intt_pwm_hw2reg_dout_mreg_t [0:0] dout; // [18:2]
+    ntt_intt_pwm_hw2reg_dout_mreg_t [0:0] dout; // [17:2]
     ntt_intt_pwm_hw2reg_status_reg_t status; // [1:2]
   } ntt_intt_pwm_hw2reg_t;
 
@@ -103,8 +103,8 @@ package ntt_intt_pwm_reg_pkg;
 
   // Register width information to check illegal writes
   parameter logic [3:0] NTT_INTT_PWM_PERMIT [4] = '{
-    4'b 0111, // index[0] NTT_INTT_PWM_DIN
-    4'b 0111, // index[1] NTT_INTT_PWM_DOUT
+    4'b 0011, // index[0] NTT_INTT_PWM_DIN
+    4'b 0011, // index[1] NTT_INTT_PWM_DOUT
     4'b 0011, // index[2] NTT_INTT_PWM_CTRL
     4'b 0001  // index[3] NTT_INTT_PWM_STATUS
   };

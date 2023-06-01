@@ -14,7 +14,7 @@
             cname: "DIN",
             swaccess: "wo",
             fields: [
-                { bits: "16:0"
+                { bits: "15:0"
                 }
             ],
           }
@@ -28,7 +28,7 @@
             hwaccess: "hwo",
             hwext: "true",
             fields: [
-                { bits: "16:0"
+                { bits: "15:0"
                 }
             ],
           }

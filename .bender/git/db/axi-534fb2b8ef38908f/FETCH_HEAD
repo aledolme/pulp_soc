@@ -11,11 +11,12 @@ c4b31dcd076d5e845ee445489dcd6d9ec8718366	not-for-merge	branch 'cdc_gated' of htt
 eb162f4b7a3a4b71d1f7981121cb75a8a5f811c5	not-for-merge	branch 'dwc_fixed' of https://github.com/pulp-platform/axi
 e6bca54c2b36ffd023809d5b99cd15e73f86e99a	not-for-merge	branch 'feature/axil_dw_masked' of https://github.com/pulp-platform/axi
 cb7ce34c9c77f0d41abab2da3363d967dcba8f02	not-for-merge	branch 'feature/multicast-xbar' of https://github.com/pulp-platform/axi
-7550fdb4b6f10a4ef5e877d8239bcfdc22d93a63	not-for-merge	branch 'gh-pages' of https://github.com/pulp-platform/axi
+cb452079458d4619b5e3a6758769dd19c97b309c	not-for-merge	branch 'gh-pages' of https://github.com/pulp-platform/axi
 f98105e88a880fc461ff31900820b1d7a9533a67	not-for-merge	branch 'gh-pages-doc' of https://github.com/pulp-platform/axi
 f24b1faf7bcf651f1aabdef5e8f99ce2fd817c2e	not-for-merge	branch 'master' of https://github.com/pulp-platform/axi
 dff1de6f48c3588c798e91e78e2f753bc24cf01d	not-for-merge	branch 'mem_interleaved_intf' of https://github.com/pulp-platform/axi
 db19f2c6e143588831875fb1b622fe7cce07d380	not-for-merge	branch 'michaero/detailed_mem' of https://github.com/pulp-platform/axi
+4cac889c8f0fda5a94f7fdcf34b7527fd745b7f1	not-for-merge	branch 'michaero/detailed_mem-rebase' of https://github.com/pulp-platform/axi
 ecd376c653b2d095b8e4343c061cdc477f4dd509	not-for-merge	branch 'micprog/lint' of https://github.com/pulp-platform/axi
 1dfae098bccdad358dac2c87a9f65305d6bafb46	not-for-merge	branch 'nospill_demux' of https://github.com/pulp-platform/axi
 43ba0dca0e3497c1021a163290af44e7fb809c1b	not-for-merge	branch 'type_naming' of https://github.com/pulp-platform/axi

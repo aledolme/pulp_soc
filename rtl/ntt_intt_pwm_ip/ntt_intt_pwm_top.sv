@@ -8,7 +8,7 @@
 `include "/register_interface/typedef.svh"
 `include "/register_interface/assign.svh"
 
-module ntt_intt_pwm
+module ntt_intt_pwm_top
     	#(
 	 parameter int unsigned AXI_ADDR_WIDTH = 32,
 	 localparam int unsigned AXI_DATA_WIDTH = 32, 

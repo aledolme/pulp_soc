@@ -85,7 +85,7 @@ sources:
       - rtl/ntt_intt_pwm_ip/modsub.vhd
       - rtl/ntt_intt_pwm_ip/montgomery.vhd
       - rtl/ntt_intt_pwm_ip/ntt_intt_pwm.vhd
-      - rtl/ntt_intt_pwm_ip/ntt_intt_pwm_ntt.sv
+      - rtl/ntt_intt_pwm_ip/ntt_intt_pwm_top.sv
 
           
   

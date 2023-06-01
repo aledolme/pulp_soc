@@ -5,7 +5,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ntt_intt is
+entity ntt_intt_pwm is
     port(
         clk, rst: in std_logic;
         load_a_f,load_a_i : in std_logic;
@@ -17,9 +17,9 @@ entity ntt_intt is
         dout: out std_logic_vector(15 downto 0);
         done: out std_logic
     );
-end entity ntt_intt;
+end entity ntt_intt_pwm;
 
-architecture RTL of ntt_intt is
+architecture RTL of ntt_intt_pwm is
 
 
     --------------COMPONENT------------------------------------------------

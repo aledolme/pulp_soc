@@ -91,7 +91,7 @@ module ntt_intt_pwm_top
         .start_fntt(reg_file_to_ip.ctrl.start_ntt.q & reg_file_to_ip.ctrl.start_ntt.qe),
 		.start_pwm2(reg_file_to_ip.ctrl.start_pwm.q & reg_file_to_ip.ctrl.start_pwm.qe),
 		.start_intt(reg_file_to_ip.ctrl.start_intt.q & reg_file_to_ip.ctrl.start_intt.qe),
-		.din(reg_file_to_ip.din,
+		.din(reg_file_to_ip.din),
 		.dout(dout_ntt_intt_pwm),
 		.done(ip_to_reg_file.status)
 	);

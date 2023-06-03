@@ -74,7 +74,7 @@ module ntt_intt_pwm_top
 
         
    // wiring signals between control unit and ip
-   wire logic [15:0] din_ntt_intt_pwm, dout_ntt_intt_pwm;
+   wire logic [31:0] din_ntt_intt_pwm, dout_ntt_intt_pwm;
    
    assign din_ntt_intt_pwm = reg_file_to_ip.din;
   

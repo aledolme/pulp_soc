@@ -365,10 +365,10 @@ begin
     begin
         case y is
             when LOAD =>
-                --di2_0 <= din;
-                --di2_1 <= din;
-				di2_0 <= "0000111100001111";
-                di2_1 <= "0000111100001111";
+                di2_0 <= din;
+                di2_1 <= din;
+				--di2_0 <= "0000111100001111";
+                --di2_1 <= "0000111100001111";
 
                 if load_type = '0' then
                     dw2_0 <= "0" & std_logic_vector(din_cnt(6 downto 0));

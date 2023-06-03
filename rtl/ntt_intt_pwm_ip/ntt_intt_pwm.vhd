@@ -13,8 +13,8 @@ entity ntt_intt_pwm is
         read_a,read_b: in std_logic;
         start_ab: in std_logic;
         start_fntt,start_pwm2,start_intt: in std_logic;
-        din: in std_logic_vector(15 downto 0);
-        dout: out std_logic_vector(15 downto 0);
+        din: in std_logic_vector(31 downto 0);
+        dout: out std_logic_vector(31 downto 0);
         done: out std_logic
     );
 end entity ntt_intt_pwm;
@@ -365,8 +365,8 @@ begin
     begin
         case y is
             when LOAD =>
-                di2_0 <= din;
-                di2_1 <= din;
+                di2_0 <= din(15 downto 0);
+                di2_1 <= din(15 downto 0);
 				--di2_0 <= "0000111100001111";
                 --di2_1 <= "0000111100001111";
 
@@ -773,7 +773,7 @@ begin
         elsif clk'event and clk = '1' then
             if y=READ then
                 if dout_cnt > 0 then
-                    dout <= final_dout;       
+                    dout <= "1010101010111011" & final_dout;       
                 end if;
             else
                 dout <= (others=>'0'); 

@@ -93,7 +93,7 @@ module ntt_intt_pwm_top
 		.start_intt(reg_file_to_ip.ctrl.start_intt.q),
 		.din(din_ntt_intt_pwm),
 		.dout(dout_ntt_intt_pwm),
-		.done(ip_to_reg_file.status.q)
+		.done(ip_to_reg_file.status)
 	);
 
   assign ip_to_reg_file.dout = dout_ntt_intt_pwm;

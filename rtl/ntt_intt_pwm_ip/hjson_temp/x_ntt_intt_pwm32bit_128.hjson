@@ -13,6 +13,7 @@
             count: "128",
             cname: "DIN",
             swaccess: "wo",
+			hwaccess: "hro",
             fields: [
                 { bits: "31:0"
                 }

@@ -53,7 +53,6 @@ package ntt_intt_pwm_reg_pkg;
 
   typedef struct packed {
     logic        d;
-    logic        de;
   } ntt_intt_pwm_hw2reg_status_reg_t;
 
 
@@ -69,8 +68,8 @@ package ntt_intt_pwm_reg_pkg;
   // Internal design logic to register //
   ///////////////////////////////////////
   typedef struct packed {
-    ntt_intt_pwm_hw2reg_dout_reg_t dout; // [34:35]
-    ntt_intt_pwm_hw2reg_status_reg_t status; // [34:35]
+    ntt_intt_pwm_hw2reg_dout_reg_t dout; // [33:34]
+    ntt_intt_pwm_hw2reg_status_reg_t status; // [33:34]
   } ntt_intt_pwm_hw2reg_t;
 
   // Register Address

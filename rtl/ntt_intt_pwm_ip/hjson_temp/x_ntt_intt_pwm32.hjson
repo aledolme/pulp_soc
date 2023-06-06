@@ -68,6 +68,7 @@
 	  desc: " Contains status information about ntt_intt_pwm"
 	  swaccess: "ro",
 	  hwaccess: "hwo",
+      hwext: "true",
 	  fields: [
 	      { bits: "0", name: "STATUS",
 		desc: "If set output is valid"

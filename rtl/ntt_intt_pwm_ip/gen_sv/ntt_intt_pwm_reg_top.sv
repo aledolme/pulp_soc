@@ -89,6 +89,7 @@ module ntt_intt_pwm_reg_top #(
   logic ctrl_start_intt_wd;
   logic ctrl_start_intt_we;
   logic status_qs;
+  logic status_re;
 
   // Register instances
   // R[din]: V(False)
@@ -385,28 +386,18 @@ module ntt_intt_pwm_reg_top #(
   );
 
 
-  // R[status]: V(False)
+  // R[status]: V(True)
 
-  prim_subreg #(
-    .DW      (1),
-    .SWACCESS("RO"),
-    .RESVAL  (1'h0)
+  prim_subreg_ext #(
+    .DW    (1)
   ) u_status (
-    .clk_i   (clk_i    ),
-    .rst_ni  (rst_ni  ),
-
+    .re     (status_re),
     .we     (1'b0),
-    .wd     ('0  ),
-
-    // from internal hardware
-    .de     (hw2reg.status.de),
-    .d      (hw2reg.status.d ),
-
-    // to internal hardware
+    .wd     ('0),
+    .d      (hw2reg.status.d),
+    .qre    (),
     .qe     (),
     .q      (),
-
-    // to register interface (read)
     .qs     (status_qs)
   );
 
@@ -468,6 +459,7 @@ module ntt_intt_pwm_reg_top #(
   assign ctrl_start_intt_we = addr_hit[2] & reg_we & ~wr_err;
   assign ctrl_start_intt_wd = reg_wdata[9];
 
+  assign status_re = addr_hit[3] && reg_re;
 
   // Read data return
   always_comb begin

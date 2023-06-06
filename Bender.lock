@@ -163,7 +163,7 @@ packages:
     revision: ~
     version: ~
     source:
-      Path: /home/phd-students/alessandra.dolmeta/Desktop/pqc_riscv/pulp_soc/./register_interface
+      Path: /home/alessandra.dolmeta/pqc_riscv/pulp_soc/./register_interface
     dependencies:
       - axi
       - common_cells

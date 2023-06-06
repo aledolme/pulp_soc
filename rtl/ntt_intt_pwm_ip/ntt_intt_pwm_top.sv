@@ -76,22 +76,22 @@ module ntt_intt_pwm_top
    // wiring signals between control unit and ip
    wire logic [31:0] din_ntt_intt_pwm, dout_ntt_intt_pwm;
    
-   assign din_ntt_intt_pwm = reg_file_to_ip.din;
+   //assign din_ntt_intt_pwm = reg_file_to_ip.din;
   
    assign reset_neg = !rst_ni;
 		       			        	
 	ntt_intt_pwm i_ntt_intt_pwm (
 		.clk(clk_i),
 		.rst(reset_neg),
-		.load_a_f(reg_file_to_ip.ctrl.load_a_f.q),
-		.load_a_i(reg_file_to_ip.ctrl.load_a_i.q),
-		.read_a(reg_file_to_ip.ctrl.read_a.q),
-		.read_b(reg_file_to_ip.ctrl.read_b.q),
-        .start_ab(reg_file_to_ip.ctrl.start_ab.q),
+		.load_a_f(reg_file_to_ip.ctrl.load_a_f.q & reg_file_to_ip.ctrl.load_a_f.qe),
+		.load_a_i(reg_file_to_ip.ctrl.load_a_i.q & reg_file_to_ip.ctrl.load_a_i.qe),
+		.read_a(reg_file_to_ip.ctrl.read_a.q & reg_file_to_ip.ctrl.read_a.qe),
+		.read_b(reg_file_to_ip.ctrl.read_b.q & reg_file_to_ip.ctrl.read_b.qe),
+        .start_ab(reg_file_to_ip.ctrl.start_ab.q & reg_file_to_ip.ctrl.start_ab.qe),
         .start_fntt(reg_file_to_ip.ctrl.start_ntt.q & reg_file_to_ip.ctrl.start_ntt.qe),
 		.start_pwm2(reg_file_to_ip.ctrl.start_pwm.q & reg_file_to_ip.ctrl.start_pwm.qe),
 		.start_intt(reg_file_to_ip.ctrl.start_intt.q & reg_file_to_ip.ctrl.start_intt.qe),
-		.din(din_ntt_intt_pwm),
+		.din(reg_file_to_ip.din),
 		.dout(dout_ntt_intt_pwm),
 		.done(ip_to_reg_file.status)
 	);

@@ -6,67 +6,54 @@
 
 package ntt_intt_pwm_reg_pkg;
 
-  // Param list
-  parameter int DIN = 128;
-  parameter int DOUT = 128;
-
   ////////////////////////////
   // Typedefs for registers //
   ////////////////////////////
   typedef struct packed {
     logic [31:0] q;
-  } ntt_intt_pwm_reg2hw_din_mreg_t;
+  } ntt_intt_pwm_reg2hw_din_reg_t;
 
   typedef struct packed {
     struct packed {
       logic        q;
-      logic        qe;
     } load_a_f;
     struct packed {
       logic        q;
-      logic        qe;
     } load_a_i;
     struct packed {
       logic        q;
-      logic        qe;
     } load_b_f;
     struct packed {
       logic        q;
-      logic        qe;
     } load_b_i;
     struct packed {
       logic        q;
-      logic        qe;
     } read_a;
     struct packed {
       logic        q;
-      logic        qe;
     } read_b;
     struct packed {
       logic        q;
-      logic        qe;
     } start_ab;
     struct packed {
       logic        q;
-      logic        qe;
     } start_ntt;
     struct packed {
       logic        q;
-      logic        qe;
     } start_pwm;
     struct packed {
       logic        q;
-      logic        qe;
     } start_intt;
   } ntt_intt_pwm_reg2hw_ctrl_reg_t;
 
 
   typedef struct packed {
     logic [31:0] d;
-  } ntt_intt_pwm_hw2reg_dout_mreg_t;
+  } ntt_intt_pwm_hw2reg_dout_reg_t;
 
   typedef struct packed {
     logic        d;
+    logic        de;
   } ntt_intt_pwm_hw2reg_status_reg_t;
 
 
@@ -74,801 +61,39 @@ package ntt_intt_pwm_reg_pkg;
   // Register to internal design logic //
   ///////////////////////////////////////
   typedef struct packed {
-    ntt_intt_pwm_reg2hw_din_mreg_t [127:0] din; // [4116:21]
-    ntt_intt_pwm_reg2hw_ctrl_reg_t ctrl; // [20:1]
+    ntt_intt_pwm_reg2hw_din_reg_t din; // [42:11]
+    ntt_intt_pwm_reg2hw_ctrl_reg_t ctrl; // [10:1]
   } ntt_intt_pwm_reg2hw_t;
 
   ///////////////////////////////////////
   // Internal design logic to register //
   ///////////////////////////////////////
   typedef struct packed {
-    ntt_intt_pwm_hw2reg_dout_mreg_t [127:0] dout; // [4097:2]
-    ntt_intt_pwm_hw2reg_status_reg_t status; // [1:2]
+    ntt_intt_pwm_hw2reg_dout_reg_t dout; // [34:35]
+    ntt_intt_pwm_hw2reg_status_reg_t status; // [34:35]
   } ntt_intt_pwm_hw2reg_t;
 
   // Register Address
-  parameter logic [10:0] NTT_INTT_PWM_DIN_0_OFFSET = 11'h 0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_1_OFFSET = 11'h 4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_2_OFFSET = 11'h 8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_3_OFFSET = 11'h c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_4_OFFSET = 11'h 10;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_5_OFFSET = 11'h 14;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_6_OFFSET = 11'h 18;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_7_OFFSET = 11'h 1c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_8_OFFSET = 11'h 20;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_9_OFFSET = 11'h 24;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_10_OFFSET = 11'h 28;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_11_OFFSET = 11'h 2c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_12_OFFSET = 11'h 30;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_13_OFFSET = 11'h 34;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_14_OFFSET = 11'h 38;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_15_OFFSET = 11'h 3c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_16_OFFSET = 11'h 40;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_17_OFFSET = 11'h 44;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_18_OFFSET = 11'h 48;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_19_OFFSET = 11'h 4c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_20_OFFSET = 11'h 50;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_21_OFFSET = 11'h 54;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_22_OFFSET = 11'h 58;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_23_OFFSET = 11'h 5c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_24_OFFSET = 11'h 60;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_25_OFFSET = 11'h 64;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_26_OFFSET = 11'h 68;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_27_OFFSET = 11'h 6c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_28_OFFSET = 11'h 70;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_29_OFFSET = 11'h 74;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_30_OFFSET = 11'h 78;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_31_OFFSET = 11'h 7c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_32_OFFSET = 11'h 80;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_33_OFFSET = 11'h 84;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_34_OFFSET = 11'h 88;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_35_OFFSET = 11'h 8c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_36_OFFSET = 11'h 90;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_37_OFFSET = 11'h 94;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_38_OFFSET = 11'h 98;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_39_OFFSET = 11'h 9c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_40_OFFSET = 11'h a0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_41_OFFSET = 11'h a4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_42_OFFSET = 11'h a8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_43_OFFSET = 11'h ac;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_44_OFFSET = 11'h b0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_45_OFFSET = 11'h b4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_46_OFFSET = 11'h b8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_47_OFFSET = 11'h bc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_48_OFFSET = 11'h c0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_49_OFFSET = 11'h c4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_50_OFFSET = 11'h c8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_51_OFFSET = 11'h cc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_52_OFFSET = 11'h d0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_53_OFFSET = 11'h d4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_54_OFFSET = 11'h d8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_55_OFFSET = 11'h dc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_56_OFFSET = 11'h e0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_57_OFFSET = 11'h e4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_58_OFFSET = 11'h e8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_59_OFFSET = 11'h ec;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_60_OFFSET = 11'h f0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_61_OFFSET = 11'h f4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_62_OFFSET = 11'h f8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_63_OFFSET = 11'h fc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_64_OFFSET = 11'h 100;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_65_OFFSET = 11'h 104;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_66_OFFSET = 11'h 108;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_67_OFFSET = 11'h 10c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_68_OFFSET = 11'h 110;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_69_OFFSET = 11'h 114;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_70_OFFSET = 11'h 118;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_71_OFFSET = 11'h 11c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_72_OFFSET = 11'h 120;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_73_OFFSET = 11'h 124;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_74_OFFSET = 11'h 128;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_75_OFFSET = 11'h 12c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_76_OFFSET = 11'h 130;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_77_OFFSET = 11'h 134;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_78_OFFSET = 11'h 138;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_79_OFFSET = 11'h 13c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_80_OFFSET = 11'h 140;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_81_OFFSET = 11'h 144;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_82_OFFSET = 11'h 148;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_83_OFFSET = 11'h 14c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_84_OFFSET = 11'h 150;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_85_OFFSET = 11'h 154;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_86_OFFSET = 11'h 158;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_87_OFFSET = 11'h 15c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_88_OFFSET = 11'h 160;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_89_OFFSET = 11'h 164;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_90_OFFSET = 11'h 168;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_91_OFFSET = 11'h 16c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_92_OFFSET = 11'h 170;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_93_OFFSET = 11'h 174;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_94_OFFSET = 11'h 178;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_95_OFFSET = 11'h 17c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_96_OFFSET = 11'h 180;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_97_OFFSET = 11'h 184;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_98_OFFSET = 11'h 188;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_99_OFFSET = 11'h 18c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_100_OFFSET = 11'h 190;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_101_OFFSET = 11'h 194;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_102_OFFSET = 11'h 198;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_103_OFFSET = 11'h 19c;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_104_OFFSET = 11'h 1a0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_105_OFFSET = 11'h 1a4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_106_OFFSET = 11'h 1a8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_107_OFFSET = 11'h 1ac;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_108_OFFSET = 11'h 1b0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_109_OFFSET = 11'h 1b4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_110_OFFSET = 11'h 1b8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_111_OFFSET = 11'h 1bc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_112_OFFSET = 11'h 1c0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_113_OFFSET = 11'h 1c4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_114_OFFSET = 11'h 1c8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_115_OFFSET = 11'h 1cc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_116_OFFSET = 11'h 1d0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_117_OFFSET = 11'h 1d4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_118_OFFSET = 11'h 1d8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_119_OFFSET = 11'h 1dc;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_120_OFFSET = 11'h 1e0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_121_OFFSET = 11'h 1e4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_122_OFFSET = 11'h 1e8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_123_OFFSET = 11'h 1ec;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_124_OFFSET = 11'h 1f0;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_125_OFFSET = 11'h 1f4;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_126_OFFSET = 11'h 1f8;
-  parameter logic [10:0] NTT_INTT_PWM_DIN_127_OFFSET = 11'h 1fc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_0_OFFSET = 11'h 200;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_1_OFFSET = 11'h 204;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_2_OFFSET = 11'h 208;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_3_OFFSET = 11'h 20c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_4_OFFSET = 11'h 210;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_5_OFFSET = 11'h 214;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_6_OFFSET = 11'h 218;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_7_OFFSET = 11'h 21c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_8_OFFSET = 11'h 220;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_9_OFFSET = 11'h 224;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_10_OFFSET = 11'h 228;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_11_OFFSET = 11'h 22c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_12_OFFSET = 11'h 230;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_13_OFFSET = 11'h 234;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_14_OFFSET = 11'h 238;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_15_OFFSET = 11'h 23c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_16_OFFSET = 11'h 240;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_17_OFFSET = 11'h 244;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_18_OFFSET = 11'h 248;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_19_OFFSET = 11'h 24c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_20_OFFSET = 11'h 250;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_21_OFFSET = 11'h 254;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_22_OFFSET = 11'h 258;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_23_OFFSET = 11'h 25c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_24_OFFSET = 11'h 260;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_25_OFFSET = 11'h 264;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_26_OFFSET = 11'h 268;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_27_OFFSET = 11'h 26c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_28_OFFSET = 11'h 270;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_29_OFFSET = 11'h 274;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_30_OFFSET = 11'h 278;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_31_OFFSET = 11'h 27c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_32_OFFSET = 11'h 280;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_33_OFFSET = 11'h 284;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_34_OFFSET = 11'h 288;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_35_OFFSET = 11'h 28c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_36_OFFSET = 11'h 290;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_37_OFFSET = 11'h 294;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_38_OFFSET = 11'h 298;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_39_OFFSET = 11'h 29c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_40_OFFSET = 11'h 2a0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_41_OFFSET = 11'h 2a4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_42_OFFSET = 11'h 2a8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_43_OFFSET = 11'h 2ac;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_44_OFFSET = 11'h 2b0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_45_OFFSET = 11'h 2b4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_46_OFFSET = 11'h 2b8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_47_OFFSET = 11'h 2bc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_48_OFFSET = 11'h 2c0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_49_OFFSET = 11'h 2c4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_50_OFFSET = 11'h 2c8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_51_OFFSET = 11'h 2cc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_52_OFFSET = 11'h 2d0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_53_OFFSET = 11'h 2d4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_54_OFFSET = 11'h 2d8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_55_OFFSET = 11'h 2dc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_56_OFFSET = 11'h 2e0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_57_OFFSET = 11'h 2e4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_58_OFFSET = 11'h 2e8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_59_OFFSET = 11'h 2ec;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_60_OFFSET = 11'h 2f0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_61_OFFSET = 11'h 2f4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_62_OFFSET = 11'h 2f8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_63_OFFSET = 11'h 2fc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_64_OFFSET = 11'h 300;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_65_OFFSET = 11'h 304;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_66_OFFSET = 11'h 308;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_67_OFFSET = 11'h 30c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_68_OFFSET = 11'h 310;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_69_OFFSET = 11'h 314;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_70_OFFSET = 11'h 318;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_71_OFFSET = 11'h 31c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_72_OFFSET = 11'h 320;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_73_OFFSET = 11'h 324;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_74_OFFSET = 11'h 328;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_75_OFFSET = 11'h 32c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_76_OFFSET = 11'h 330;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_77_OFFSET = 11'h 334;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_78_OFFSET = 11'h 338;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_79_OFFSET = 11'h 33c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_80_OFFSET = 11'h 340;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_81_OFFSET = 11'h 344;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_82_OFFSET = 11'h 348;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_83_OFFSET = 11'h 34c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_84_OFFSET = 11'h 350;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_85_OFFSET = 11'h 354;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_86_OFFSET = 11'h 358;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_87_OFFSET = 11'h 35c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_88_OFFSET = 11'h 360;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_89_OFFSET = 11'h 364;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_90_OFFSET = 11'h 368;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_91_OFFSET = 11'h 36c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_92_OFFSET = 11'h 370;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_93_OFFSET = 11'h 374;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_94_OFFSET = 11'h 378;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_95_OFFSET = 11'h 37c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_96_OFFSET = 11'h 380;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_97_OFFSET = 11'h 384;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_98_OFFSET = 11'h 388;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_99_OFFSET = 11'h 38c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_100_OFFSET = 11'h 390;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_101_OFFSET = 11'h 394;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_102_OFFSET = 11'h 398;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_103_OFFSET = 11'h 39c;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_104_OFFSET = 11'h 3a0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_105_OFFSET = 11'h 3a4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_106_OFFSET = 11'h 3a8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_107_OFFSET = 11'h 3ac;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_108_OFFSET = 11'h 3b0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_109_OFFSET = 11'h 3b4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_110_OFFSET = 11'h 3b8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_111_OFFSET = 11'h 3bc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_112_OFFSET = 11'h 3c0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_113_OFFSET = 11'h 3c4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_114_OFFSET = 11'h 3c8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_115_OFFSET = 11'h 3cc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_116_OFFSET = 11'h 3d0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_117_OFFSET = 11'h 3d4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_118_OFFSET = 11'h 3d8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_119_OFFSET = 11'h 3dc;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_120_OFFSET = 11'h 3e0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_121_OFFSET = 11'h 3e4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_122_OFFSET = 11'h 3e8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_123_OFFSET = 11'h 3ec;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_124_OFFSET = 11'h 3f0;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_125_OFFSET = 11'h 3f4;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_126_OFFSET = 11'h 3f8;
-  parameter logic [10:0] NTT_INTT_PWM_DOUT_127_OFFSET = 11'h 3fc;
-  parameter logic [10:0] NTT_INTT_PWM_CTRL_OFFSET = 11'h 400;
-  parameter logic [10:0] NTT_INTT_PWM_STATUS_OFFSET = 11'h 404;
+  parameter logic [3:0] NTT_INTT_PWM_DIN_OFFSET = 4'h 0;
+  parameter logic [3:0] NTT_INTT_PWM_DOUT_OFFSET = 4'h 4;
+  parameter logic [3:0] NTT_INTT_PWM_CTRL_OFFSET = 4'h 8;
+  parameter logic [3:0] NTT_INTT_PWM_STATUS_OFFSET = 4'h c;
 
 
   // Register Index
   typedef enum int {
-    NTT_INTT_PWM_DIN_0,
-    NTT_INTT_PWM_DIN_1,
-    NTT_INTT_PWM_DIN_2,
-    NTT_INTT_PWM_DIN_3,
-    NTT_INTT_PWM_DIN_4,
-    NTT_INTT_PWM_DIN_5,
-    NTT_INTT_PWM_DIN_6,
-    NTT_INTT_PWM_DIN_7,
-    NTT_INTT_PWM_DIN_8,
-    NTT_INTT_PWM_DIN_9,
-    NTT_INTT_PWM_DIN_10,
-    NTT_INTT_PWM_DIN_11,
-    NTT_INTT_PWM_DIN_12,
-    NTT_INTT_PWM_DIN_13,
-    NTT_INTT_PWM_DIN_14,
-    NTT_INTT_PWM_DIN_15,
-    NTT_INTT_PWM_DIN_16,
-    NTT_INTT_PWM_DIN_17,
-    NTT_INTT_PWM_DIN_18,
-    NTT_INTT_PWM_DIN_19,
-    NTT_INTT_PWM_DIN_20,
-    NTT_INTT_PWM_DIN_21,
-    NTT_INTT_PWM_DIN_22,
-    NTT_INTT_PWM_DIN_23,
-    NTT_INTT_PWM_DIN_24,
-    NTT_INTT_PWM_DIN_25,
-    NTT_INTT_PWM_DIN_26,
-    NTT_INTT_PWM_DIN_27,
-    NTT_INTT_PWM_DIN_28,
-    NTT_INTT_PWM_DIN_29,
-    NTT_INTT_PWM_DIN_30,
-    NTT_INTT_PWM_DIN_31,
-    NTT_INTT_PWM_DIN_32,
-    NTT_INTT_PWM_DIN_33,
-    NTT_INTT_PWM_DIN_34,
-    NTT_INTT_PWM_DIN_35,
-    NTT_INTT_PWM_DIN_36,
-    NTT_INTT_PWM_DIN_37,
-    NTT_INTT_PWM_DIN_38,
-    NTT_INTT_PWM_DIN_39,
-    NTT_INTT_PWM_DIN_40,
-    NTT_INTT_PWM_DIN_41,
-    NTT_INTT_PWM_DIN_42,
-    NTT_INTT_PWM_DIN_43,
-    NTT_INTT_PWM_DIN_44,
-    NTT_INTT_PWM_DIN_45,
-    NTT_INTT_PWM_DIN_46,
-    NTT_INTT_PWM_DIN_47,
-    NTT_INTT_PWM_DIN_48,
-    NTT_INTT_PWM_DIN_49,
-    NTT_INTT_PWM_DIN_50,
-    NTT_INTT_PWM_DIN_51,
-    NTT_INTT_PWM_DIN_52,
-    NTT_INTT_PWM_DIN_53,
-    NTT_INTT_PWM_DIN_54,
-    NTT_INTT_PWM_DIN_55,
-    NTT_INTT_PWM_DIN_56,
-    NTT_INTT_PWM_DIN_57,
-    NTT_INTT_PWM_DIN_58,
-    NTT_INTT_PWM_DIN_59,
-    NTT_INTT_PWM_DIN_60,
-    NTT_INTT_PWM_DIN_61,
-    NTT_INTT_PWM_DIN_62,
-    NTT_INTT_PWM_DIN_63,
-    NTT_INTT_PWM_DIN_64,
-    NTT_INTT_PWM_DIN_65,
-    NTT_INTT_PWM_DIN_66,
-    NTT_INTT_PWM_DIN_67,
-    NTT_INTT_PWM_DIN_68,
-    NTT_INTT_PWM_DIN_69,
-    NTT_INTT_PWM_DIN_70,
-    NTT_INTT_PWM_DIN_71,
-    NTT_INTT_PWM_DIN_72,
-    NTT_INTT_PWM_DIN_73,
-    NTT_INTT_PWM_DIN_74,
-    NTT_INTT_PWM_DIN_75,
-    NTT_INTT_PWM_DIN_76,
-    NTT_INTT_PWM_DIN_77,
-    NTT_INTT_PWM_DIN_78,
-    NTT_INTT_PWM_DIN_79,
-    NTT_INTT_PWM_DIN_80,
-    NTT_INTT_PWM_DIN_81,
-    NTT_INTT_PWM_DIN_82,
-    NTT_INTT_PWM_DIN_83,
-    NTT_INTT_PWM_DIN_84,
-    NTT_INTT_PWM_DIN_85,
-    NTT_INTT_PWM_DIN_86,
-    NTT_INTT_PWM_DIN_87,
-    NTT_INTT_PWM_DIN_88,
-    NTT_INTT_PWM_DIN_89,
-    NTT_INTT_PWM_DIN_90,
-    NTT_INTT_PWM_DIN_91,
-    NTT_INTT_PWM_DIN_92,
-    NTT_INTT_PWM_DIN_93,
-    NTT_INTT_PWM_DIN_94,
-    NTT_INTT_PWM_DIN_95,
-    NTT_INTT_PWM_DIN_96,
-    NTT_INTT_PWM_DIN_97,
-    NTT_INTT_PWM_DIN_98,
-    NTT_INTT_PWM_DIN_99,
-    NTT_INTT_PWM_DIN_100,
-    NTT_INTT_PWM_DIN_101,
-    NTT_INTT_PWM_DIN_102,
-    NTT_INTT_PWM_DIN_103,
-    NTT_INTT_PWM_DIN_104,
-    NTT_INTT_PWM_DIN_105,
-    NTT_INTT_PWM_DIN_106,
-    NTT_INTT_PWM_DIN_107,
-    NTT_INTT_PWM_DIN_108,
-    NTT_INTT_PWM_DIN_109,
-    NTT_INTT_PWM_DIN_110,
-    NTT_INTT_PWM_DIN_111,
-    NTT_INTT_PWM_DIN_112,
-    NTT_INTT_PWM_DIN_113,
-    NTT_INTT_PWM_DIN_114,
-    NTT_INTT_PWM_DIN_115,
-    NTT_INTT_PWM_DIN_116,
-    NTT_INTT_PWM_DIN_117,
-    NTT_INTT_PWM_DIN_118,
-    NTT_INTT_PWM_DIN_119,
-    NTT_INTT_PWM_DIN_120,
-    NTT_INTT_PWM_DIN_121,
-    NTT_INTT_PWM_DIN_122,
-    NTT_INTT_PWM_DIN_123,
-    NTT_INTT_PWM_DIN_124,
-    NTT_INTT_PWM_DIN_125,
-    NTT_INTT_PWM_DIN_126,
-    NTT_INTT_PWM_DIN_127,
-    NTT_INTT_PWM_DOUT_0,
-    NTT_INTT_PWM_DOUT_1,
-    NTT_INTT_PWM_DOUT_2,
-    NTT_INTT_PWM_DOUT_3,
-    NTT_INTT_PWM_DOUT_4,
-    NTT_INTT_PWM_DOUT_5,
-    NTT_INTT_PWM_DOUT_6,
-    NTT_INTT_PWM_DOUT_7,
-    NTT_INTT_PWM_DOUT_8,
-    NTT_INTT_PWM_DOUT_9,
-    NTT_INTT_PWM_DOUT_10,
-    NTT_INTT_PWM_DOUT_11,
-    NTT_INTT_PWM_DOUT_12,
-    NTT_INTT_PWM_DOUT_13,
-    NTT_INTT_PWM_DOUT_14,
-    NTT_INTT_PWM_DOUT_15,
-    NTT_INTT_PWM_DOUT_16,
-    NTT_INTT_PWM_DOUT_17,
-    NTT_INTT_PWM_DOUT_18,
-    NTT_INTT_PWM_DOUT_19,
-    NTT_INTT_PWM_DOUT_20,
-    NTT_INTT_PWM_DOUT_21,
-    NTT_INTT_PWM_DOUT_22,
-    NTT_INTT_PWM_DOUT_23,
-    NTT_INTT_PWM_DOUT_24,
-    NTT_INTT_PWM_DOUT_25,
-    NTT_INTT_PWM_DOUT_26,
-    NTT_INTT_PWM_DOUT_27,
-    NTT_INTT_PWM_DOUT_28,
-    NTT_INTT_PWM_DOUT_29,
-    NTT_INTT_PWM_DOUT_30,
-    NTT_INTT_PWM_DOUT_31,
-    NTT_INTT_PWM_DOUT_32,
-    NTT_INTT_PWM_DOUT_33,
-    NTT_INTT_PWM_DOUT_34,
-    NTT_INTT_PWM_DOUT_35,
-    NTT_INTT_PWM_DOUT_36,
-    NTT_INTT_PWM_DOUT_37,
-    NTT_INTT_PWM_DOUT_38,
-    NTT_INTT_PWM_DOUT_39,
-    NTT_INTT_PWM_DOUT_40,
-    NTT_INTT_PWM_DOUT_41,
-    NTT_INTT_PWM_DOUT_42,
-    NTT_INTT_PWM_DOUT_43,
-    NTT_INTT_PWM_DOUT_44,
-    NTT_INTT_PWM_DOUT_45,
-    NTT_INTT_PWM_DOUT_46,
-    NTT_INTT_PWM_DOUT_47,
-    NTT_INTT_PWM_DOUT_48,
-    NTT_INTT_PWM_DOUT_49,
-    NTT_INTT_PWM_DOUT_50,
-    NTT_INTT_PWM_DOUT_51,
-    NTT_INTT_PWM_DOUT_52,
-    NTT_INTT_PWM_DOUT_53,
-    NTT_INTT_PWM_DOUT_54,
-    NTT_INTT_PWM_DOUT_55,
-    NTT_INTT_PWM_DOUT_56,
-    NTT_INTT_PWM_DOUT_57,
-    NTT_INTT_PWM_DOUT_58,
-    NTT_INTT_PWM_DOUT_59,
-    NTT_INTT_PWM_DOUT_60,
-    NTT_INTT_PWM_DOUT_61,
-    NTT_INTT_PWM_DOUT_62,
-    NTT_INTT_PWM_DOUT_63,
-    NTT_INTT_PWM_DOUT_64,
-    NTT_INTT_PWM_DOUT_65,
-    NTT_INTT_PWM_DOUT_66,
-    NTT_INTT_PWM_DOUT_67,
-    NTT_INTT_PWM_DOUT_68,
-    NTT_INTT_PWM_DOUT_69,
-    NTT_INTT_PWM_DOUT_70,
-    NTT_INTT_PWM_DOUT_71,
-    NTT_INTT_PWM_DOUT_72,
-    NTT_INTT_PWM_DOUT_73,
-    NTT_INTT_PWM_DOUT_74,
-    NTT_INTT_PWM_DOUT_75,
-    NTT_INTT_PWM_DOUT_76,
-    NTT_INTT_PWM_DOUT_77,
-    NTT_INTT_PWM_DOUT_78,
-    NTT_INTT_PWM_DOUT_79,
-    NTT_INTT_PWM_DOUT_80,
-    NTT_INTT_PWM_DOUT_81,
-    NTT_INTT_PWM_DOUT_82,
-    NTT_INTT_PWM_DOUT_83,
-    NTT_INTT_PWM_DOUT_84,
-    NTT_INTT_PWM_DOUT_85,
-    NTT_INTT_PWM_DOUT_86,
-    NTT_INTT_PWM_DOUT_87,
-    NTT_INTT_PWM_DOUT_88,
-    NTT_INTT_PWM_DOUT_89,
-    NTT_INTT_PWM_DOUT_90,
-    NTT_INTT_PWM_DOUT_91,
-    NTT_INTT_PWM_DOUT_92,
-    NTT_INTT_PWM_DOUT_93,
-    NTT_INTT_PWM_DOUT_94,
-    NTT_INTT_PWM_DOUT_95,
-    NTT_INTT_PWM_DOUT_96,
-    NTT_INTT_PWM_DOUT_97,
-    NTT_INTT_PWM_DOUT_98,
-    NTT_INTT_PWM_DOUT_99,
-    NTT_INTT_PWM_DOUT_100,
-    NTT_INTT_PWM_DOUT_101,
-    NTT_INTT_PWM_DOUT_102,
-    NTT_INTT_PWM_DOUT_103,
-    NTT_INTT_PWM_DOUT_104,
-    NTT_INTT_PWM_DOUT_105,
-    NTT_INTT_PWM_DOUT_106,
-    NTT_INTT_PWM_DOUT_107,
-    NTT_INTT_PWM_DOUT_108,
-    NTT_INTT_PWM_DOUT_109,
-    NTT_INTT_PWM_DOUT_110,
-    NTT_INTT_PWM_DOUT_111,
-    NTT_INTT_PWM_DOUT_112,
-    NTT_INTT_PWM_DOUT_113,
-    NTT_INTT_PWM_DOUT_114,
-    NTT_INTT_PWM_DOUT_115,
-    NTT_INTT_PWM_DOUT_116,
-    NTT_INTT_PWM_DOUT_117,
-    NTT_INTT_PWM_DOUT_118,
-    NTT_INTT_PWM_DOUT_119,
-    NTT_INTT_PWM_DOUT_120,
-    NTT_INTT_PWM_DOUT_121,
-    NTT_INTT_PWM_DOUT_122,
-    NTT_INTT_PWM_DOUT_123,
-    NTT_INTT_PWM_DOUT_124,
-    NTT_INTT_PWM_DOUT_125,
-    NTT_INTT_PWM_DOUT_126,
-    NTT_INTT_PWM_DOUT_127,
+    NTT_INTT_PWM_DIN,
+    NTT_INTT_PWM_DOUT,
     NTT_INTT_PWM_CTRL,
     NTT_INTT_PWM_STATUS
   } ntt_intt_pwm_id_e;
 
   // Register width information to check illegal writes
-  parameter logic [3:0] NTT_INTT_PWM_PERMIT [258] = '{
-    4'b 1111, // index[  0] NTT_INTT_PWM_DIN_0
-    4'b 1111, // index[  1] NTT_INTT_PWM_DIN_1
-    4'b 1111, // index[  2] NTT_INTT_PWM_DIN_2
-    4'b 1111, // index[  3] NTT_INTT_PWM_DIN_3
-    4'b 1111, // index[  4] NTT_INTT_PWM_DIN_4
-    4'b 1111, // index[  5] NTT_INTT_PWM_DIN_5
-    4'b 1111, // index[  6] NTT_INTT_PWM_DIN_6
-    4'b 1111, // index[  7] NTT_INTT_PWM_DIN_7
-    4'b 1111, // index[  8] NTT_INTT_PWM_DIN_8
-    4'b 1111, // index[  9] NTT_INTT_PWM_DIN_9
-    4'b 1111, // index[ 10] NTT_INTT_PWM_DIN_10
-    4'b 1111, // index[ 11] NTT_INTT_PWM_DIN_11
-    4'b 1111, // index[ 12] NTT_INTT_PWM_DIN_12
-    4'b 1111, // index[ 13] NTT_INTT_PWM_DIN_13
-    4'b 1111, // index[ 14] NTT_INTT_PWM_DIN_14
-    4'b 1111, // index[ 15] NTT_INTT_PWM_DIN_15
-    4'b 1111, // index[ 16] NTT_INTT_PWM_DIN_16
-    4'b 1111, // index[ 17] NTT_INTT_PWM_DIN_17
-    4'b 1111, // index[ 18] NTT_INTT_PWM_DIN_18
-    4'b 1111, // index[ 19] NTT_INTT_PWM_DIN_19
-    4'b 1111, // index[ 20] NTT_INTT_PWM_DIN_20
-    4'b 1111, // index[ 21] NTT_INTT_PWM_DIN_21
-    4'b 1111, // index[ 22] NTT_INTT_PWM_DIN_22
-    4'b 1111, // index[ 23] NTT_INTT_PWM_DIN_23
-    4'b 1111, // index[ 24] NTT_INTT_PWM_DIN_24
-    4'b 1111, // index[ 25] NTT_INTT_PWM_DIN_25
-    4'b 1111, // index[ 26] NTT_INTT_PWM_DIN_26
-    4'b 1111, // index[ 27] NTT_INTT_PWM_DIN_27
-    4'b 1111, // index[ 28] NTT_INTT_PWM_DIN_28
-    4'b 1111, // index[ 29] NTT_INTT_PWM_DIN_29
-    4'b 1111, // index[ 30] NTT_INTT_PWM_DIN_30
-    4'b 1111, // index[ 31] NTT_INTT_PWM_DIN_31
-    4'b 1111, // index[ 32] NTT_INTT_PWM_DIN_32
-    4'b 1111, // index[ 33] NTT_INTT_PWM_DIN_33
-    4'b 1111, // index[ 34] NTT_INTT_PWM_DIN_34
-    4'b 1111, // index[ 35] NTT_INTT_PWM_DIN_35
-    4'b 1111, // index[ 36] NTT_INTT_PWM_DIN_36
-    4'b 1111, // index[ 37] NTT_INTT_PWM_DIN_37
-    4'b 1111, // index[ 38] NTT_INTT_PWM_DIN_38
-    4'b 1111, // index[ 39] NTT_INTT_PWM_DIN_39
-    4'b 1111, // index[ 40] NTT_INTT_PWM_DIN_40
-    4'b 1111, // index[ 41] NTT_INTT_PWM_DIN_41
-    4'b 1111, // index[ 42] NTT_INTT_PWM_DIN_42
-    4'b 1111, // index[ 43] NTT_INTT_PWM_DIN_43
-    4'b 1111, // index[ 44] NTT_INTT_PWM_DIN_44
-    4'b 1111, // index[ 45] NTT_INTT_PWM_DIN_45
-    4'b 1111, // index[ 46] NTT_INTT_PWM_DIN_46
-    4'b 1111, // index[ 47] NTT_INTT_PWM_DIN_47
-    4'b 1111, // index[ 48] NTT_INTT_PWM_DIN_48
-    4'b 1111, // index[ 49] NTT_INTT_PWM_DIN_49
-    4'b 1111, // index[ 50] NTT_INTT_PWM_DIN_50
-    4'b 1111, // index[ 51] NTT_INTT_PWM_DIN_51
-    4'b 1111, // index[ 52] NTT_INTT_PWM_DIN_52
-    4'b 1111, // index[ 53] NTT_INTT_PWM_DIN_53
-    4'b 1111, // index[ 54] NTT_INTT_PWM_DIN_54
-    4'b 1111, // index[ 55] NTT_INTT_PWM_DIN_55
-    4'b 1111, // index[ 56] NTT_INTT_PWM_DIN_56
-    4'b 1111, // index[ 57] NTT_INTT_PWM_DIN_57
-    4'b 1111, // index[ 58] NTT_INTT_PWM_DIN_58
-    4'b 1111, // index[ 59] NTT_INTT_PWM_DIN_59
-    4'b 1111, // index[ 60] NTT_INTT_PWM_DIN_60
-    4'b 1111, // index[ 61] NTT_INTT_PWM_DIN_61
-    4'b 1111, // index[ 62] NTT_INTT_PWM_DIN_62
-    4'b 1111, // index[ 63] NTT_INTT_PWM_DIN_63
-    4'b 1111, // index[ 64] NTT_INTT_PWM_DIN_64
-    4'b 1111, // index[ 65] NTT_INTT_PWM_DIN_65
-    4'b 1111, // index[ 66] NTT_INTT_PWM_DIN_66
-    4'b 1111, // index[ 67] NTT_INTT_PWM_DIN_67
-    4'b 1111, // index[ 68] NTT_INTT_PWM_DIN_68
-    4'b 1111, // index[ 69] NTT_INTT_PWM_DIN_69
-    4'b 1111, // index[ 70] NTT_INTT_PWM_DIN_70
-    4'b 1111, // index[ 71] NTT_INTT_PWM_DIN_71
-    4'b 1111, // index[ 72] NTT_INTT_PWM_DIN_72
-    4'b 1111, // index[ 73] NTT_INTT_PWM_DIN_73
-    4'b 1111, // index[ 74] NTT_INTT_PWM_DIN_74
-    4'b 1111, // index[ 75] NTT_INTT_PWM_DIN_75
-    4'b 1111, // index[ 76] NTT_INTT_PWM_DIN_76
-    4'b 1111, // index[ 77] NTT_INTT_PWM_DIN_77
-    4'b 1111, // index[ 78] NTT_INTT_PWM_DIN_78
-    4'b 1111, // index[ 79] NTT_INTT_PWM_DIN_79
-    4'b 1111, // index[ 80] NTT_INTT_PWM_DIN_80
-    4'b 1111, // index[ 81] NTT_INTT_PWM_DIN_81
-    4'b 1111, // index[ 82] NTT_INTT_PWM_DIN_82
-    4'b 1111, // index[ 83] NTT_INTT_PWM_DIN_83
-    4'b 1111, // index[ 84] NTT_INTT_PWM_DIN_84
-    4'b 1111, // index[ 85] NTT_INTT_PWM_DIN_85
-    4'b 1111, // index[ 86] NTT_INTT_PWM_DIN_86
-    4'b 1111, // index[ 87] NTT_INTT_PWM_DIN_87
-    4'b 1111, // index[ 88] NTT_INTT_PWM_DIN_88
-    4'b 1111, // index[ 89] NTT_INTT_PWM_DIN_89
-    4'b 1111, // index[ 90] NTT_INTT_PWM_DIN_90
-    4'b 1111, // index[ 91] NTT_INTT_PWM_DIN_91
-    4'b 1111, // index[ 92] NTT_INTT_PWM_DIN_92
-    4'b 1111, // index[ 93] NTT_INTT_PWM_DIN_93
-    4'b 1111, // index[ 94] NTT_INTT_PWM_DIN_94
-    4'b 1111, // index[ 95] NTT_INTT_PWM_DIN_95
-    4'b 1111, // index[ 96] NTT_INTT_PWM_DIN_96
-    4'b 1111, // index[ 97] NTT_INTT_PWM_DIN_97
-    4'b 1111, // index[ 98] NTT_INTT_PWM_DIN_98
-    4'b 1111, // index[ 99] NTT_INTT_PWM_DIN_99
-    4'b 1111, // index[100] NTT_INTT_PWM_DIN_100
-    4'b 1111, // index[101] NTT_INTT_PWM_DIN_101
-    4'b 1111, // index[102] NTT_INTT_PWM_DIN_102
-    4'b 1111, // index[103] NTT_INTT_PWM_DIN_103
-    4'b 1111, // index[104] NTT_INTT_PWM_DIN_104
-    4'b 1111, // index[105] NTT_INTT_PWM_DIN_105
-    4'b 1111, // index[106] NTT_INTT_PWM_DIN_106
-    4'b 1111, // index[107] NTT_INTT_PWM_DIN_107
-    4'b 1111, // index[108] NTT_INTT_PWM_DIN_108
-    4'b 1111, // index[109] NTT_INTT_PWM_DIN_109
-    4'b 1111, // index[110] NTT_INTT_PWM_DIN_110
-    4'b 1111, // index[111] NTT_INTT_PWM_DIN_111
-    4'b 1111, // index[112] NTT_INTT_PWM_DIN_112
-    4'b 1111, // index[113] NTT_INTT_PWM_DIN_113
-    4'b 1111, // index[114] NTT_INTT_PWM_DIN_114
-    4'b 1111, // index[115] NTT_INTT_PWM_DIN_115
-    4'b 1111, // index[116] NTT_INTT_PWM_DIN_116
-    4'b 1111, // index[117] NTT_INTT_PWM_DIN_117
-    4'b 1111, // index[118] NTT_INTT_PWM_DIN_118
-    4'b 1111, // index[119] NTT_INTT_PWM_DIN_119
-    4'b 1111, // index[120] NTT_INTT_PWM_DIN_120
-    4'b 1111, // index[121] NTT_INTT_PWM_DIN_121
-    4'b 1111, // index[122] NTT_INTT_PWM_DIN_122
-    4'b 1111, // index[123] NTT_INTT_PWM_DIN_123
-    4'b 1111, // index[124] NTT_INTT_PWM_DIN_124
-    4'b 1111, // index[125] NTT_INTT_PWM_DIN_125
-    4'b 1111, // index[126] NTT_INTT_PWM_DIN_126
-    4'b 1111, // index[127] NTT_INTT_PWM_DIN_127
-    4'b 1111, // index[128] NTT_INTT_PWM_DOUT_0
-    4'b 1111, // index[129] NTT_INTT_PWM_DOUT_1
-    4'b 1111, // index[130] NTT_INTT_PWM_DOUT_2
-    4'b 1111, // index[131] NTT_INTT_PWM_DOUT_3
-    4'b 1111, // index[132] NTT_INTT_PWM_DOUT_4
-    4'b 1111, // index[133] NTT_INTT_PWM_DOUT_5
-    4'b 1111, // index[134] NTT_INTT_PWM_DOUT_6
-    4'b 1111, // index[135] NTT_INTT_PWM_DOUT_7
-    4'b 1111, // index[136] NTT_INTT_PWM_DOUT_8
-    4'b 1111, // index[137] NTT_INTT_PWM_DOUT_9
-    4'b 1111, // index[138] NTT_INTT_PWM_DOUT_10
-    4'b 1111, // index[139] NTT_INTT_PWM_DOUT_11
-    4'b 1111, // index[140] NTT_INTT_PWM_DOUT_12
-    4'b 1111, // index[141] NTT_INTT_PWM_DOUT_13
-    4'b 1111, // index[142] NTT_INTT_PWM_DOUT_14
-    4'b 1111, // index[143] NTT_INTT_PWM_DOUT_15
-    4'b 1111, // index[144] NTT_INTT_PWM_DOUT_16
-    4'b 1111, // index[145] NTT_INTT_PWM_DOUT_17
-    4'b 1111, // index[146] NTT_INTT_PWM_DOUT_18
-    4'b 1111, // index[147] NTT_INTT_PWM_DOUT_19
-    4'b 1111, // index[148] NTT_INTT_PWM_DOUT_20
-    4'b 1111, // index[149] NTT_INTT_PWM_DOUT_21
-    4'b 1111, // index[150] NTT_INTT_PWM_DOUT_22
-    4'b 1111, // index[151] NTT_INTT_PWM_DOUT_23
-    4'b 1111, // index[152] NTT_INTT_PWM_DOUT_24
-    4'b 1111, // index[153] NTT_INTT_PWM_DOUT_25
-    4'b 1111, // index[154] NTT_INTT_PWM_DOUT_26
-    4'b 1111, // index[155] NTT_INTT_PWM_DOUT_27
-    4'b 1111, // index[156] NTT_INTT_PWM_DOUT_28
-    4'b 1111, // index[157] NTT_INTT_PWM_DOUT_29
-    4'b 1111, // index[158] NTT_INTT_PWM_DOUT_30
-    4'b 1111, // index[159] NTT_INTT_PWM_DOUT_31
-    4'b 1111, // index[160] NTT_INTT_PWM_DOUT_32
-    4'b 1111, // index[161] NTT_INTT_PWM_DOUT_33
-    4'b 1111, // index[162] NTT_INTT_PWM_DOUT_34
-    4'b 1111, // index[163] NTT_INTT_PWM_DOUT_35
-    4'b 1111, // index[164] NTT_INTT_PWM_DOUT_36
-    4'b 1111, // index[165] NTT_INTT_PWM_DOUT_37
-    4'b 1111, // index[166] NTT_INTT_PWM_DOUT_38
-    4'b 1111, // index[167] NTT_INTT_PWM_DOUT_39
-    4'b 1111, // index[168] NTT_INTT_PWM_DOUT_40
-    4'b 1111, // index[169] NTT_INTT_PWM_DOUT_41
-    4'b 1111, // index[170] NTT_INTT_PWM_DOUT_42
-    4'b 1111, // index[171] NTT_INTT_PWM_DOUT_43
-    4'b 1111, // index[172] NTT_INTT_PWM_DOUT_44
-    4'b 1111, // index[173] NTT_INTT_PWM_DOUT_45
-    4'b 1111, // index[174] NTT_INTT_PWM_DOUT_46
-    4'b 1111, // index[175] NTT_INTT_PWM_DOUT_47
-    4'b 1111, // index[176] NTT_INTT_PWM_DOUT_48
-    4'b 1111, // index[177] NTT_INTT_PWM_DOUT_49
-    4'b 1111, // index[178] NTT_INTT_PWM_DOUT_50
-    4'b 1111, // index[179] NTT_INTT_PWM_DOUT_51
-    4'b 1111, // index[180] NTT_INTT_PWM_DOUT_52
-    4'b 1111, // index[181] NTT_INTT_PWM_DOUT_53
-    4'b 1111, // index[182] NTT_INTT_PWM_DOUT_54
-    4'b 1111, // index[183] NTT_INTT_PWM_DOUT_55
-    4'b 1111, // index[184] NTT_INTT_PWM_DOUT_56
-    4'b 1111, // index[185] NTT_INTT_PWM_DOUT_57
-    4'b 1111, // index[186] NTT_INTT_PWM_DOUT_58
-    4'b 1111, // index[187] NTT_INTT_PWM_DOUT_59
-    4'b 1111, // index[188] NTT_INTT_PWM_DOUT_60
-    4'b 1111, // index[189] NTT_INTT_PWM_DOUT_61
-    4'b 1111, // index[190] NTT_INTT_PWM_DOUT_62
-    4'b 1111, // index[191] NTT_INTT_PWM_DOUT_63
-    4'b 1111, // index[192] NTT_INTT_PWM_DOUT_64
-    4'b 1111, // index[193] NTT_INTT_PWM_DOUT_65
-    4'b 1111, // index[194] NTT_INTT_PWM_DOUT_66
-    4'b 1111, // index[195] NTT_INTT_PWM_DOUT_67
-    4'b 1111, // index[196] NTT_INTT_PWM_DOUT_68
-    4'b 1111, // index[197] NTT_INTT_PWM_DOUT_69
-    4'b 1111, // index[198] NTT_INTT_PWM_DOUT_70
-    4'b 1111, // index[199] NTT_INTT_PWM_DOUT_71
-    4'b 1111, // index[200] NTT_INTT_PWM_DOUT_72
-    4'b 1111, // index[201] NTT_INTT_PWM_DOUT_73
-    4'b 1111, // index[202] NTT_INTT_PWM_DOUT_74
-    4'b 1111, // index[203] NTT_INTT_PWM_DOUT_75
-    4'b 1111, // index[204] NTT_INTT_PWM_DOUT_76
-    4'b 1111, // index[205] NTT_INTT_PWM_DOUT_77
-    4'b 1111, // index[206] NTT_INTT_PWM_DOUT_78
-    4'b 1111, // index[207] NTT_INTT_PWM_DOUT_79
-    4'b 1111, // index[208] NTT_INTT_PWM_DOUT_80
-    4'b 1111, // index[209] NTT_INTT_PWM_DOUT_81
-    4'b 1111, // index[210] NTT_INTT_PWM_DOUT_82
-    4'b 1111, // index[211] NTT_INTT_PWM_DOUT_83
-    4'b 1111, // index[212] NTT_INTT_PWM_DOUT_84
-    4'b 1111, // index[213] NTT_INTT_PWM_DOUT_85
-    4'b 1111, // index[214] NTT_INTT_PWM_DOUT_86
-    4'b 1111, // index[215] NTT_INTT_PWM_DOUT_87
-    4'b 1111, // index[216] NTT_INTT_PWM_DOUT_88
-    4'b 1111, // index[217] NTT_INTT_PWM_DOUT_89
-    4'b 1111, // index[218] NTT_INTT_PWM_DOUT_90
-    4'b 1111, // index[219] NTT_INTT_PWM_DOUT_91
-    4'b 1111, // index[220] NTT_INTT_PWM_DOUT_92
-    4'b 1111, // index[221] NTT_INTT_PWM_DOUT_93
-    4'b 1111, // index[222] NTT_INTT_PWM_DOUT_94
-    4'b 1111, // index[223] NTT_INTT_PWM_DOUT_95
-    4'b 1111, // index[224] NTT_INTT_PWM_DOUT_96
-    4'b 1111, // index[225] NTT_INTT_PWM_DOUT_97
-    4'b 1111, // index[226] NTT_INTT_PWM_DOUT_98
-    4'b 1111, // index[227] NTT_INTT_PWM_DOUT_99
-    4'b 1111, // index[228] NTT_INTT_PWM_DOUT_100
-    4'b 1111, // index[229] NTT_INTT_PWM_DOUT_101
-    4'b 1111, // index[230] NTT_INTT_PWM_DOUT_102
-    4'b 1111, // index[231] NTT_INTT_PWM_DOUT_103
-    4'b 1111, // index[232] NTT_INTT_PWM_DOUT_104
-    4'b 1111, // index[233] NTT_INTT_PWM_DOUT_105
-    4'b 1111, // index[234] NTT_INTT_PWM_DOUT_106
-    4'b 1111, // index[235] NTT_INTT_PWM_DOUT_107
-    4'b 1111, // index[236] NTT_INTT_PWM_DOUT_108
-    4'b 1111, // index[237] NTT_INTT_PWM_DOUT_109
-    4'b 1111, // index[238] NTT_INTT_PWM_DOUT_110
-    4'b 1111, // index[239] NTT_INTT_PWM_DOUT_111
-    4'b 1111, // index[240] NTT_INTT_PWM_DOUT_112
-    4'b 1111, // index[241] NTT_INTT_PWM_DOUT_113
-    4'b 1111, // index[242] NTT_INTT_PWM_DOUT_114
-    4'b 1111, // index[243] NTT_INTT_PWM_DOUT_115
-    4'b 1111, // index[244] NTT_INTT_PWM_DOUT_116
-    4'b 1111, // index[245] NTT_INTT_PWM_DOUT_117
-    4'b 1111, // index[246] NTT_INTT_PWM_DOUT_118
-    4'b 1111, // index[247] NTT_INTT_PWM_DOUT_119
-    4'b 1111, // index[248] NTT_INTT_PWM_DOUT_120
-    4'b 1111, // index[249] NTT_INTT_PWM_DOUT_121
-    4'b 1111, // index[250] NTT_INTT_PWM_DOUT_122
-    4'b 1111, // index[251] NTT_INTT_PWM_DOUT_123
-    4'b 1111, // index[252] NTT_INTT_PWM_DOUT_124
-    4'b 1111, // index[253] NTT_INTT_PWM_DOUT_125
-    4'b 1111, // index[254] NTT_INTT_PWM_DOUT_126
-    4'b 1111, // index[255] NTT_INTT_PWM_DOUT_127
-    4'b 0011, // index[256] NTT_INTT_PWM_CTRL
-    4'b 0001  // index[257] NTT_INTT_PWM_STATUS
+  parameter logic [3:0] NTT_INTT_PWM_PERMIT [4] = '{
+    4'b 1111, // index[0] NTT_INTT_PWM_DIN
+    4'b 1111, // index[1] NTT_INTT_PWM_DOUT
+    4'b 0011, // index[2] NTT_INTT_PWM_CTRL
+    4'b 0001  // index[3] NTT_INTT_PWM_STATUS
   };
 endpackage
 

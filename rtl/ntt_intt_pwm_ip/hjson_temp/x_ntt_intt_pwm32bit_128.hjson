@@ -39,7 +39,6 @@
         cname: "ctrl",
         swaccess: "wo",
         hwaccess: "hro",
-        hwext: "true",
         fields: [
             { bits: "0", name: "load_a_f",
 				desc: "Make the ntt_intt_pwm starts collecting a_f"
@@ -77,10 +76,9 @@
 	  desc: " Contains status information about ntt_intt_pwm"
 	  swaccess: "ro",
 	  hwaccess: "hwo",
-	  hwext: "true",
 	  fields: [
 	      { bits: "0", name: "STATUS",
-		desc: "If set output of keccack is valid"
+		desc: "If set output is valid"
 	      }
 	  ]	
 	}

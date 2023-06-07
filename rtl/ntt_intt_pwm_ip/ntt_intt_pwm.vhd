@@ -166,6 +166,8 @@ architecture RTL of ntt_intt_pwm is
     signal A, B, W : std_logic_vector(15 downto 0);
     signal E, O, MUL, ADD, SUB : std_logic_vector(15 downto 0); -- @suppress "signal ADD is never read" -- @suppress "signal SUB is never read"
 
+    signal done_sig: std_logic;
+
 begin
 
     load_signals <= load_a_f & load_a_i & load_b_f & load_b_i;
@@ -707,34 +709,35 @@ begin
         end if;
     end process;
     
-    ntt_intt_10: process (clk, rst)
+    ntt_intt_10: process (clk, rst, done_sig)
     begin
         if (rst = '1') then
-            done <= '0';
+            done_sig <= '0';
         elsif clk'event and clk = '1' then
             case y is
                 when FNTT =>
                     if op_cnt = FNTT_CC-1 then
-                        done <= '1';
+                        done_sig <= '1';
                     else
-                        done <= '0';
+                        done_sig <= '0';
                     end if;
                 when PWM2 =>
                     if op_cnt = PWM2_CC-1 then
-                        done <= '1';
+                        done_sig <= '1';
                     else
-                        done <= '0';
+                        done_sig <= '0';
                     end if;
                 when INTT =>
                     if op_cnt = INTT_CC-1 then
-                        done <= '1';
+                        done_sig <= '1';
                     else
-                        done <= '0';
+                        done_sig <= '0';
                     end if;
                 when others =>
-                    done <='0';
+                   null;
             end case;
         end if;
+        done <= done_sig;
     end process;
     
     barret_mux_readab0: bN_2to1mux

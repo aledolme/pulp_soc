@@ -69,6 +69,7 @@ sources:
       - rtl/ntt_intt_pwm_ip/gen_sv/ntt_intt_pwm_reg_top.sv
       - rtl/ntt_intt_pwm_ip/param.vhd
       - rtl/ntt_intt_pwm_ip/reg_rst.vhd
+      - rtl/ntt_intt_pwm_ip/reg_N_level_rst_n.vhd
       - rtl/ntt_intt_pwm_ip/shiftreg.vhd
       - rtl/ntt_intt_pwm_ip/BRAM.vhd
       - rtl/ntt_intt_pwm_ip/BROM_TW.vhd

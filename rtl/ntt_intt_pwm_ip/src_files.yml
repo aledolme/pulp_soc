@@ -9,6 +9,7 @@ false_adder:
       - BROM_TW.vhd
       - adder.vhd
       - address_generator.vhd
+      - reg_N_level_rst_n.vhd
       - bN_2to1mux.vhd
       - barrett.vhd
       - butterfly.vhd

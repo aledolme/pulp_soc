@@ -13,7 +13,7 @@
             count: "128",
             cname: "DIN",
             swaccess: "wo",
-			hwaccess: "hro",
+			      hwaccess: "hro",
             fields: [
                 { bits: "31:0"
                 }
@@ -28,7 +28,7 @@
             swaccess: "ro",
             hwaccess: "hwo",
             hwext: "true",
-            fields: [
+            fields: [b_f
                 { bits: "31:0"
                 }
             ],

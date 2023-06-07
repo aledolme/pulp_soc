@@ -97,6 +97,19 @@ architecture RTL of ntt_intt_pwm is
             output : out std_logic_vector(N-1 downto 0)
         );
     end component bN_2to1mux;
+    
+    component reg_N_level_rst_n
+        generic(
+            N : positive := 5;
+            M : positive := 1
+        );
+        port(
+            D   : in  std_logic_vector(N - 1 downto 0);
+            clk : in  std_logic;
+            rst : in  std_logic;
+            Q   : out std_logic_vector(N - 1 downto 0)
+        );
+    end component reg_N_level_rst_n;
 
 
 
@@ -105,6 +118,10 @@ architecture RTL of ntt_intt_pwm is
     signal y: state;
 
     signal din_cnt : unsigned(7 downto 0);    --counter for OP_LOAD_DATA/B state
+    signal din_split_data: integer;
+    signal load_signals, load_signals_1: std_logic_vector(3 downto 0);
+    
+    
     signal dout_cnt : unsigned(8 downto 0);    --counter for OP_READ_DATA/B state
     signal op_cnt : unsigned(9 downto 0);    --counter for FNTT,INTT,PWM2 operations
 
@@ -151,7 +168,22 @@ architecture RTL of ntt_intt_pwm is
 
 begin
 
-
+    load_signals <= load_a_f & load_a_i & load_b_f & load_b_i;
+    
+    load_reg: reg_N_level_rst_n
+        generic map(
+            N => 4,
+            M => LOAD_DELAY
+        )
+        port map(
+            D   => load_signals,
+            clk => clk,
+            rst => rst,
+            Q   => load_signals_1
+        );
+    
+    
+    
     --FSM----------------------------------------------------------------
     ntt_intt_FSM: process (clk, rst)
     begin  -- process
@@ -163,7 +195,7 @@ begin
         elsif clk'event and clk = '1' then  -- rising clock edge
             case y is
                 when IDLE =>
-                    if load_a_f = '1' or load_a_i = '1' or load_b_f = '1' or load_b_i = '1' then
+                    if load_signals_1(3) = '1' or load_a_i = '1' or load_b_f = '1' or load_b_i = '1' then
                         y <= LOAD;
                     elsif start_fntt = '1' then
                         y <= FNTT;
@@ -273,7 +305,7 @@ begin
             exec_ab <= '0';
         elsif clk'event and clk = '1' then
             --load
-            if(load_a_f='1' or load_a_i='1' ) then
+            if(load_signals_1(3)='1' or load_a_i='1' ) then
                 load_ab <= '0';
             elsif(load_b_f='1'  or load_b_i='1' ) then
                 load_ab <= '1';
@@ -310,12 +342,22 @@ begin
             din_cnt <= (others=>'0');
             dout_cnt <= (others=>'0');
             op_cnt <= (others=>'0');
+            din_split_data <= 0;
         elsif clk'event and clk = '1' then
+            
             if y = LOAD then
                 if din_cnt=255 then
                     din_cnt <= (others=>'0');
                 else
-                    din_cnt <= din_cnt + 1;
+                    if din_split_data=LOAD_INPUT then
+                        din_split_data <= 0;
+                        din_cnt <= din_cnt + 1;
+                    elsif din_split_data=1 then
+                        din_split_data <= din_split_data +1;
+                        din_cnt <= din_cnt + 1;
+                    else
+                        din_split_data <= din_split_data +1;
+                    end if;
                 end if;
             end if;
             if y = READ then
@@ -361,14 +403,19 @@ begin
         end if;
     end process;
 
-    ntt_intt_7: process( E, O, brsel0, brsel1, brselen0, brselen1, c_loop_pwm(0), din, din_cnt(0), din_cnt(6 downto 0), din_cnt(7 downto 1), din_cnt(7), dout_cnt(7 downto 1), load_type, op_out_a, op_out_b, raddr0, raddr1, read_ab, stage_cnt, waddr0, waddr1, wen0, wen1, y)
+    ntt_intt_7: process(din_split_data, E, O, brsel0, brsel1, brselen0, brselen1, c_loop_pwm(0), din, din_cnt(0), din_cnt(6 downto 0), din_cnt(7 downto 1), din_cnt(7), dout_cnt(7 downto 1), load_type, op_out_a, op_out_b, raddr0, raddr1, read_ab, stage_cnt, waddr0, waddr1, wen0, wen1, y)
     begin
         case y is
             when LOAD =>
-                di2_0 <= din(15 downto 0);
-                di2_1 <= din(15 downto 0);
-				--di2_0 <= "0000111100001111";
-                --di2_1 <= "0000111100001111";
+                
+                if din_split_data<2 then
+                    di2_0 <= din(31 downto 16);
+                    di2_1 <= din(31 downto 16);
+                else
+                    di2_0 <= din(15 downto 0);
+                    di2_1 <= din(15 downto 0);
+                end if;
+               
 
                 if load_type = '0' then
                     dw2_0 <= "0" & std_logic_vector(din_cnt(6 downto 0));
@@ -773,7 +820,7 @@ begin
         elsif clk'event and clk = '1' then
             if y=READ then
                 if dout_cnt > 0 then
-                    dout <= "1010101010111011" & final_dout;       
+                    dout <= "0000000000000000" & final_dout;       
                 end if;
             else
                 dout <= (others=>'0'); 

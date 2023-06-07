@@ -25,5 +25,8 @@ package param is
     constant PE_NUMBER : integer := 1;
     constant barrett_v : integer := 20159; --((1 << 26) + q/2) / q
     
+    constant LOAD_DELAY: integer := 7;
+    constant LOAD_INPUT: integer := 5;
+    
     
 end package;

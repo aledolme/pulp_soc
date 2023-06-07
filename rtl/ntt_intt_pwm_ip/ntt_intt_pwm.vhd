@@ -165,8 +165,10 @@ architecture RTL of ntt_intt_pwm is
     signal PWM_TW, sel_PWM_TW : std_logic;
     signal A, B, W : std_logic_vector(15 downto 0);
     signal E, O, MUL, ADD, SUB : std_logic_vector(15 downto 0); -- @suppress "signal ADD is never read" -- @suppress "signal SUB is never read"
-
+    
     signal done_sig: std_logic;
+    signal dout_temp: std_logic_vector(15 downto 0);
+    signal dout_concatenated: std_logic_vector(31 downto 0);
 
 begin
 
@@ -823,7 +825,12 @@ begin
         elsif clk'event and clk = '1' then
             if y=READ then
                 if dout_cnt > 0 then
-                    dout <= "0000000000000000" & final_dout;       
+                    if dout_cnt(0)='0' then
+                       dout <= dout_temp & final_dout;  
+                    else
+                        dout_temp <= final_dout;  
+                    end if;
+                         
                 end if;
             else
                 dout <= (others=>'0'); 

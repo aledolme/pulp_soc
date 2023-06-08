@@ -27,6 +27,7 @@ package param is
     
     constant LOAD_DELAY: integer := 7;
     constant LOAD_INPUT: integer := 5;
+    constant READ_OUTPUT: integer:= 5;
     
     
 end package;

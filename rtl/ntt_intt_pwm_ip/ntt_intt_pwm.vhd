@@ -110,11 +110,13 @@ architecture RTL of ntt_intt_pwm is
             Q   : out std_logic_vector(N - 1 downto 0)
         );
     end component reg_N_level_rst_n;
+    
+    
 
 
 
     -------------SIGNALS---------------------------------------------------
-    TYPE state IS (IDLE, LOAD, FNTT, INTT, PWM2, READ);
+    TYPE state IS (IDLE, LOAD, FNTT, INTT, PWM2, READ, WAIT_READ);
     signal y: state;
 
     signal din_cnt : unsigned(7 downto 0);    --counter for OP_LOAD_DATA/B state
@@ -167,8 +169,10 @@ architecture RTL of ntt_intt_pwm is
     signal E, O, MUL, ADD, SUB : std_logic_vector(15 downto 0); -- @suppress "signal ADD is never read" -- @suppress "signal SUB is never read"
     
     signal done_sig: std_logic;
-    signal dout_temp: std_logic_vector(15 downto 0);
-    signal dout_concatenated: std_logic_vector(31 downto 0);
+    signal dout_temp1: std_logic_vector(15 downto 0);
+    signal dout_wait: integer;
+    signal dout_temp: std_logic_vector(31 downto 0);
+    
 
 begin
 
@@ -195,6 +199,7 @@ begin
 
             y <= IDLE;
             PWM_TW <= '0';
+            dout_wait <= 0;
 
         elsif clk'event and clk = '1' then  -- rising clock edge
             case y is
@@ -244,7 +249,16 @@ begin
                     if dout_cnt = 257 then
                         y <= IDLE;
                     else
+                        y <= WAIT_READ;
+                    end if;
+                
+                when WAIT_READ =>
+                    if dout_wait = 2 then
+                        dout_wait <= 0;
                         y <= READ;
+                    else
+                        dout_wait <= dout_wait +1;
+                        y <= WAIT_READ;
                     end if;
             end case;
         end if;
@@ -368,7 +382,7 @@ begin
                 if dout_cnt=257 then
                     dout_cnt <= (others=>'0');
                 else
-                    dout_cnt <= dout_cnt + 1;
+                    dout_cnt <= dout_cnt + 1;   
                 end if;
             end if;
 
@@ -407,7 +421,7 @@ begin
         end if;
     end process;
 
-    ntt_intt_7: process(din_split_data, E, O, brsel0, brsel1, brselen0, brselen1, c_loop_pwm(0), din, din_cnt(0), din_cnt(6 downto 0), din_cnt(7 downto 1), din_cnt(7), dout_cnt(7 downto 1), load_type, op_out_a, op_out_b, raddr0, raddr1, read_ab, stage_cnt, waddr0, waddr1, wen0, wen1, y)
+    ntt_intt_7: process(din_split_data, E, O, brsel0, brsel1, brselen0, brselen1, c_loop_pwm(0), din, din_cnt(0), din_cnt(6 downto 0), din_cnt(7 downto 1), din_cnt(7), dout_cnt(7 downto 1), load_type, op_out_a, op_out_b, raddr0, raddr1, read_ab, stage_cnt, waddr0, waddr1, wen0, wen1, y, dr2_0, dr2_1)
     begin
         case y is
             when LOAD =>
@@ -575,6 +589,18 @@ begin
                     dr2_0 <= op_out_b & std_logic_vector(dout_cnt(7 downto 1));
                     dr2_1 <= op_out_b & std_logic_vector(dout_cnt(7 downto 1));
                 end if;
+
+                de2_0 <= '0';
+                de2_1 <= '0';
+                
+            when WAIT_READ =>
+                di2_0 <= (others=>'0');
+                di2_1 <= (others=>'0');
+                dw2_0 <= (others=>'0');
+                dw2_1 <= (others=>'0');
+
+                dr2_0 <= dr2_0;
+                dr2_1 <= dr2_1;
 
                 de2_0 <= '0';
                 de2_1 <= '0';
@@ -821,24 +847,26 @@ begin
    ntt_intt_11: process (clk, rst)
     begin
         if (rst = '1') then
-            dout <= (others=>'0');
+            dout_temp <= (others=>'0');
         elsif clk'event and clk = '1' then
             if y=READ then
                 if dout_cnt > 0 then
                     if dout_cnt(0)='0' then
-                       dout <= dout_temp & final_dout;  
+                       dout_temp <= dout_temp1 & final_dout;  
                     else
-                        dout_temp <= final_dout;  
+                        dout_temp1 <= final_dout;  
                     end if;
                          
                 end if;
+            elsif y=WAIT_READ then
+                dout_temp <= dout_temp;
             else
-                dout <= (others=>'0'); 
+                dout_temp <= (others=>'0'); 
             end if;
         end if;
     end process;
     
-    
+    dout <= dout_temp;
        
     --------instantiations----------------------------------------------------------
     ntt_intt_ag: address_generator

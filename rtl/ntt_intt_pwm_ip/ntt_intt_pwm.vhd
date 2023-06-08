@@ -850,6 +850,9 @@ begin
             dout_temp <= (others=>'0');
         elsif clk'event and clk = '1' then
             if y=READ then
+                dout_temp <= dout_temp;
+                
+            elsif y=WAIT_READ then
                 if dout_cnt > 0 then
                     if dout_cnt(0)='0' then
                        dout_temp <= dout_temp1 & final_dout;  
@@ -858,8 +861,6 @@ begin
                     end if;
                          
                 end if;
-            elsif y=WAIT_READ then
-                dout_temp <= dout_temp;
             else
                 dout_temp <= (others=>'0'); 
             end if;

@@ -214,7 +214,7 @@ begin
                     elsif start_intt = '1' then
                         y <= INTT;
                     elsif read_a = '1' or read_b = '1' then
-                        y <= WAIT_READ;
+                        y <= READ;
                     else
                         y <= IDLE;
                     end if;

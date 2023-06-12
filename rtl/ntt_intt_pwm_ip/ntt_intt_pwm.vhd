@@ -214,7 +214,7 @@ begin
                     elsif start_intt = '1' then
                         y <= INTT;
                     elsif read_a = '1' or read_b = '1' then
-                        y <= READ;
+                        y <= WAIT_READ;
                     else
                         y <= IDLE;
                     end if;
@@ -253,7 +253,7 @@ begin
                     end if;
                 
                 when WAIT_READ =>
-                    if dout_wait = 3 then
+                    if dout_wait = 2 then
                         dout_wait <= 0;
                         y <= READ;
                     else

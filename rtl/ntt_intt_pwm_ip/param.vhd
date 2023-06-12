@@ -17,7 +17,7 @@ package param is
     constant q : integer := 3329;
     constant q_inv: integer := -3327;
     constant div2: integer := 1665;
-    constant FNTT_CC: integer := 906;
+    constant FNTT_CC: integer := 906; 
     constant PWM2_CC: integer := 647;
     constant INTT_CC: integer := 904;
     constant MONT: integer := 1441;

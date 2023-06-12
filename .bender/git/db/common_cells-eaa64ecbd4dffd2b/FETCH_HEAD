@@ -3,7 +3,6 @@
 e61e2c13ad93eecf09c88f1ee009313e413b6922	not-for-merge	branch 'bvt_arb_tree-tbenz' of https://github.com/pulp-platform/common_cells
 e2486afcca71b685188f4fc8998b2f08f41bd961	not-for-merge	branch 'carfield' of https://github.com/pulp-platform/common_cells
 43364b6a1078a75825965a6a66581efb25de64a1	not-for-merge	branch 'ci/skip-gitlab-ext' of https://github.com/pulp-platform/common_cells
-7593fd842c7df0b91e7e404d5614aecb85f87b2d	not-for-merge	branch 'clk_int_div_static' of https://github.com/pulp-platform/common_cells
 0a9dc988745b64e12f929a1dd9bc44d8068a2bc3	not-for-merge	branch 'control-pulp' of https://github.com/pulp-platform/common_cells
 ac52f10b814f57ef5853bce43cf5d65e6fd1b447	not-for-merge	branch 'fix-ci' of https://github.com/pulp-platform/common_cells
 8207f1ddccdf7ad217a63646eeb10eee528d6a30	not-for-merge	branch 'fix-clk-div' of https://github.com/pulp-platform/common_cells
@@ -13,7 +12,7 @@ ac52f10b814f57ef5853bce43cf5d65e6fd1b447	not-for-merge	branch 'fix-style' of htt
 2c094d546372ad31a5a5d77586516fe4d49edb57	not-for-merge	branch 'flaviens-master' of https://github.com/pulp-platform/common_cells
 86cc827e136a3c426b1ff3a2b693ac66c58db1df	not-for-merge	branch 'icg-shift-reg' of https://github.com/pulp-platform/common_cells
 5a7cab001f1f5e15d2e847c6c5f787102f8b91a7	not-for-merge	branch 'id_queue-exists_data' of https://github.com/pulp-platform/common_cells
-6a8e38b2650bba7db032c1f8d50c3ab8b1a1c920	not-for-merge	branch 'master' of https://github.com/pulp-platform/common_cells
+0989ff73d0315922791bf42137c0ce0cbb4a76ca	not-for-merge	branch 'master' of https://github.com/pulp-platform/common_cells
 7de94d7666802543a4b81e7659027ec1bca86542	not-for-merge	branch 'max_pow_two-tbenz' of https://github.com/pulp-platform/common_cells
 037111ac2628b2db8081bfd752e0b8427fb7bc78	not-for-merge	branch 'multicast-xbar' of https://github.com/pulp-platform/common_cells
 8cb2dadab8dddeadcf134f1a4cc0a2221dc217b9	not-for-merge	branch 'new/multiaddr-decode' of https://github.com/pulp-platform/common_cells
@@ -69,6 +68,7 @@ bbe5c8863f7e62051962e8cc6544e2c8abc31dd0	not-for-merge	tag 'v1.26.0' of https://
 4dc9413990622dcbf4b37a19f792834c800da5c7	not-for-merge	tag 'v1.28.0' of https://github.com/pulp-platform/common_cells
 4ac82b420e46fd0005513ca2283cb3c905e7599a	not-for-merge	tag 'v1.29.0' of https://github.com/pulp-platform/common_cells
 c8deba266585c5824044b74b7fe25c2cd6acfe38	not-for-merge	tag 'v1.3.0' of https://github.com/pulp-platform/common_cells
+88942228c971898ee732091a689105c82c1b20bf	not-for-merge	tag 'v1.30.0' of https://github.com/pulp-platform/common_cells
 7fdaaa140bf330574bc585dac23692120440a9e6	not-for-merge	tag 'v1.4.0' of https://github.com/pulp-platform/common_cells
 4a5025558770bd98c8b2df596b0eafc084ed19d9	not-for-merge	tag 'v1.5.0' of https://github.com/pulp-platform/common_cells
 53dd5c50a43adc4d84c5ba5731ccb867d8f5a188	not-for-merge	tag 'v1.5.1' of https://github.com/pulp-platform/common_cells

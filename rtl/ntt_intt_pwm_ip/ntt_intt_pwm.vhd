@@ -253,7 +253,7 @@ begin
                     end if;
                 
                 when WAIT_READ =>
-                    if dout_wait = 1 then
+                    if dout_wait = 3 then
                         dout_wait <= 0;
                         y <= READ;
                     else

@@ -172,6 +172,7 @@ architecture RTL of ntt_intt_pwm is
     signal dout_temp1: std_logic_vector(15 downto 0);
     signal dout_wait: integer;
     signal dout_temp: std_logic_vector(31 downto 0);
+    signal dout_valid: std_logic;
     
 
 begin
@@ -199,7 +200,6 @@ begin
 
             y <= IDLE;
             PWM_TW <= '0';
-            dout_wait <= 0;
 
         elsif clk'event and clk = '1' then  -- rising clock edge
             case y is
@@ -253,17 +253,68 @@ begin
                     end if;
                 
                 when WAIT_READ =>
-                    if dout_wait = 2 then
-                        dout_wait <= 0;
+                    if dout_valid='1' then
                         y <= READ;
                     else
-                        dout_wait <= dout_wait +1;
                         y <= WAIT_READ;
                     end if;
             end case;
         end if;
 
     end process;
+    
+    
+    dout_cnt_FSM: process (clk, rst, y)
+    begin  -- process
+        if y=IDLE then
+            if rst = '1' then -- asynchronous reset (active high)
+                dout_wait <= 1;
+                dout_valid <= '0';
+            end if;
+        elsif y=WAIT_READ or y=READ then
+            if clk'event then
+                if  dout_wait=5 or dout_wait=6 then
+                    dout_wait <= dout_wait +1;
+                    dout_valid <= '1';
+                elsif dout_wait=7 then
+                    dout_wait <= dout_wait +1;
+                    dout_valid <= '0';
+                 elsif dout_wait=8 then
+                    dout_wait <= 0;
+                    dout_valid <= '0';
+                else
+                    dout_wait <= dout_wait +1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+--    dout_cnt_FSM: process (clk, rst, y, dout_wait)
+--    begin  -- process
+--        if y=IDLE then
+--            if rst = '1' then -- asynchronous reset (active high)
+--                dout_wait <= 0;
+--                dout_valid <= '0';
+--            end if;
+--        elsif y= WAIT_READ then
+--            if rst = '1' then -- asynchronous reset (active high)
+--                dout_wait <= 0;
+--            elsif clk'event then  -- rising and falling clock edge
+--                if dout_wait = 6 then
+--                    dout_wait <= dout_wait +1;
+--                    dout_valid <= '1';
+--                elsif dout_wait = 7 then
+--                    dout_wait <= 0;
+--                    dout_valid <= '1';
+--                else
+--                    dout_wait <= dout_wait +1;
+--                    dout_valid <= '0';
+--                end if;
+--            end if;
+--        elsif y = READ then
+--            dout_wait <= dout_wait +1;
+--        end if;
+--    end process;
 
     ---ntt_intt processes----------------------------------------------------------
     ntt_intt_1: process (clk, rst)
@@ -358,7 +409,8 @@ begin
     begin
         if (rst = '1') then
             din_cnt <= (others=>'0');
-            dout_cnt <= (others=>'0');
+            --dout_cnt <= "000000001";
+            dout_cnt <= "000000000";
             op_cnt <= (others=>'0');
             din_split_data <= 0;
         elsif clk'event and clk = '1' then
@@ -850,17 +902,19 @@ begin
             dout_temp <= (others=>'0');
         elsif clk'event and clk = '1' then
             if y=READ then
-                dout_temp <= dout_temp;
+                
+                 dout_temp <= dout_temp;
                 
             elsif y=WAIT_READ then
                 if dout_cnt > 0 then
-                    if dout_cnt(0)='0' and dout_wait=1 then
+                    if dout_cnt(0)='0' then
                        dout_temp <= dout_temp1 & final_dout;  
                     else
                         dout_temp1 <= final_dout;  
                     end if;
                          
                 end if;
+               
             else
                 dout_temp <= (others=>'0'); 
             end if;

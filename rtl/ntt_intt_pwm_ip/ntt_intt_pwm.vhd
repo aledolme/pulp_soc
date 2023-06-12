@@ -854,7 +854,7 @@ begin
                 
             elsif y=WAIT_READ then
                 if dout_cnt > 0 then
-                    if dout_cnt(0)='0' and dout_wait(0)='1' then
+                    if dout_cnt(0)='0' dout_wait=1 then
                        dout_temp <= dout_temp1 & final_dout;  
                     else
                         dout_temp1 <= final_dout;  

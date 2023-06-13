@@ -7,7 +7,7 @@ a5ce2cab6d515b12d7126f5ddcb0b925dc21bd70	not-for-merge	branch 'feature/int-mul' 
 16dcfc0acee00bb927d244b91615ff2a3c18b87a	not-for-merge	branch 'feature/new-divider' of https://github.com/pulp-platform/fpnew
 d3df9427fe8d8bba186e863998027c130e259c50	not-for-merge	branch 'feature/tiny-fpu' of https://github.com/pulp-platform/fpnew
 4d52517c38d2c39918a97fdc78e995c363efb342	not-for-merge	branch 'fix-headers' of https://github.com/pulp-platform/fpnew
-a29e3ec2dc05a420d3678b0113f636b096c6784d	not-for-merge	branch 'fix/divsqrt_synchronization' of https://github.com/pulp-platform/fpnew
+6fadb10e9e104c01e284609f05d13b4187b9546f	not-for-merge	branch 'fix/divsqrt_synchronization' of https://github.com/pulp-platform/fpnew
 0353896919c6e55c6411406a2eb9d7a675fc6ea7	not-for-merge	branch 'fpga-genesys' of https://github.com/pulp-platform/fpnew
 c02011407d136d108e5004b53136642a2e37dfe2	not-for-merge	branch 'fpu_integration' of https://github.com/pulp-platform/fpnew
 1fffb1c18f0c40e698cfaef6027a8b4526dc95b0	not-for-merge	branch 'fpu_integration2' of https://github.com/pulp-platform/fpnew

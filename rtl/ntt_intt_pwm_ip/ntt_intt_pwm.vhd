@@ -414,7 +414,9 @@ begin
             op_cnt <= (others=>'0');
             din_split_data <= 0;
         elsif clk'event and clk = '1' then
-            
+            if y=IDLE then
+                din_split_data <= 0;
+            end if;
             if y = LOAD then
                 if din_cnt=255 then
                     din_cnt <= (others=>'0');

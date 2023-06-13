@@ -19,7 +19,7 @@ package param is
     constant div2: integer := 1665;
     constant FNTT_CC: integer := 906; 
     constant PWM2_CC: integer := 647;
-    constant INTT_CC: integer := 904;
+    constant INTT_CC: integer := 906;
     constant MONT: integer := 1441;
     
     constant PE_NUMBER : integer := 1;

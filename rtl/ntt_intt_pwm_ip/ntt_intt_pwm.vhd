@@ -122,7 +122,7 @@ architecture RTL of ntt_intt_pwm is
     signal din_cnt : unsigned(7 downto 0);    --counter for OP_LOAD_DATA/B state
     signal din_split_data: integer;
     signal load_signals, load_signals_1: std_logic_vector(3 downto 0);
-    
+    signal enable_ram, enable_BRAM_01: std_logic;
     
     signal dout_cnt : unsigned(8 downto 0);    --counter for OP_READ_DATA/B state
     signal op_cnt : unsigned(9 downto 0);    --counter for FNTT,INTT,PWM2 operations
@@ -204,7 +204,7 @@ begin
         elsif clk'event and clk = '1' then  -- rising clock edge
             case y is
                 when IDLE =>
-                    if load_signals_1(3) = '1' or load_a_i = '1' or load_b_f = '1' or load_b_i = '1' then
+                    if load_signals_1(3) = '1' or load_signals_1(2) = '1' or load_signals_1(1) = '1' or load_signals_1(0) = '1' then
                         y <= LOAD;
                     elsif start_fntt = '1' then
                         y <= FNTT;
@@ -247,6 +247,7 @@ begin
                     op_selector <= '1';
                 when READ =>
                     if dout_cnt = 257 then
+                        
                         y <= IDLE;
                     else
                         y <= WAIT_READ;
@@ -289,32 +290,6 @@ begin
         end if;
     end process;
 
---    dout_cnt_FSM: process (clk, rst, y, dout_wait)
---    begin  -- process
---        if y=IDLE then
---            if rst = '1' then -- asynchronous reset (active high)
---                dout_wait <= 0;
---                dout_valid <= '0';
---            end if;
---        elsif y= WAIT_READ then
---            if rst = '1' then -- asynchronous reset (active high)
---                dout_wait <= 0;
---            elsif clk'event then  -- rising and falling clock edge
---                if dout_wait = 6 then
---                    dout_wait <= dout_wait +1;
---                    dout_valid <= '1';
---                elsif dout_wait = 7 then
---                    dout_wait <= 0;
---                    dout_valid <= '1';
---                else
---                    dout_wait <= dout_wait +1;
---                    dout_valid <= '0';
---                end if;
---            end if;
---        elsif y = READ then
---            dout_wait <= dout_wait +1;
---        end if;
---    end process;
 
     ---ntt_intt processes----------------------------------------------------------
     ntt_intt_1: process (clk, rst)
@@ -322,7 +297,7 @@ begin
         if (rst = '1') then
             load_type <= '0';
         elsif clk'event and clk = '1' then
-            if load_a_i = '1' or load_b_i = '1' then
+            if load_signals_1(2) = '1' or load_signals_1(0) = '1' then
                 load_type <= '1';
             elsif y = LOAD then
                 load_type <= load_type;
@@ -374,9 +349,9 @@ begin
             exec_ab <= '0';
         elsif clk'event and clk = '1' then
             --load
-            if(load_signals_1(3)='1' or load_a_i='1' ) then
+            if(load_signals_1(3)='1' or load_signals_1(2)='1' ) then
                 load_ab <= '0';
-            elsif(load_b_f='1'  or load_b_i='1' ) then
+            elsif(load_signals_1(1)='1'  or load_signals_1(0)='1' ) then
                 load_ab <= '1';
             elsif(y = IDLE) then
                 load_ab <= '0';
@@ -413,6 +388,7 @@ begin
             dout_cnt <= "000000000";
             op_cnt <= (others=>'0');
             din_split_data <= 0;
+            enable_ram <= '1';
         elsif clk'event and clk = '1' then
             if y=IDLE then
                 din_split_data <= 0;
@@ -424,9 +400,13 @@ begin
                     if din_split_data=LOAD_INPUT then
                         din_split_data <= 0;
                         din_cnt <= din_cnt + 1;
+                        enable_ram <= '1';
                     elsif din_split_data=1 then
                         din_split_data <= din_split_data +1;
                         din_cnt <= din_cnt + 1;
+                    elsif din_split_data=4 then
+                        din_split_data <= din_split_data +1;
+                        enable_ram <= '0';
                     else
                         din_split_data <= din_split_data +1;
                     end if;
@@ -962,10 +942,11 @@ begin
             dout  => do0_0
         );
 
+    enable_BRAM_01 <= enable_ram and de0_1;
     b_ram0_1: BRAM
         port map(
             clk   => clk,
-            wen   => de0_1,
+            wen   => enable_BRAM_01,
             waddr => dw0_1,
             din   => di0_1,
             raddr => dr0_1,

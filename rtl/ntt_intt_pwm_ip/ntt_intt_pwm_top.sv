@@ -85,6 +85,8 @@ module ntt_intt_pwm_top
 		.rst(reset_neg),
 		.load_a_f(reg_file_to_ip.ctrl.load_a_f.q),
 		.load_a_i(reg_file_to_ip.ctrl.load_a_i.q),
+		.load_b_f(reg_file_to_ip.ctrl.load_b_f.q),
+		.load_b_i(reg_file_to_ip.ctrl.load_b_i.q),
 		.read_a(reg_file_to_ip.ctrl.read_a.q),
 		.read_b(reg_file_to_ip.ctrl.read_b.q),
         .start_ab(reg_file_to_ip.ctrl.start_ab.q),

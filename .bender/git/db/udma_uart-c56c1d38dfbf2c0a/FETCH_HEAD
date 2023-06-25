@@ -2,6 +2,7 @@
 ffac2f9693cb065f750120e98e0aa6d2af0674ed	not-for-merge	branch 'control-pulp' of https://github.com/pulp-platform/udma_uart
 18ed1986fd62920b1065005c370fd740995cfd4a	not-for-merge	branch 'master' of https://github.com/pulp-platform/udma_uart
 960795c59d27d1d03f375ac31d3cf93eab373cfe	not-for-merge	branch 'rc' of https://github.com/pulp-platform/udma_uart
+2e3fd3dca9acbb301daa28d5ffb1a4684956d5f6	not-for-merge	branch 'sm/uart_ctrlflow' of https://github.com/pulp-platform/udma_uart
 e25b51d03a964793081b2fb491afa939efc5c852	not-for-merge	branch 'v2.0.0-draft' of https://github.com/pulp-platform/udma_uart
 18c7641e42391b2d5788dcd434fad3214fade95d	not-for-merge	branch 'vega' of https://github.com/pulp-platform/udma_uart
 6e008d935a8b98d964cf3212216cd378ef365cd0	not-for-merge	branch 'vega-remove-jg-config' of https://github.com/pulp-platform/udma_uart

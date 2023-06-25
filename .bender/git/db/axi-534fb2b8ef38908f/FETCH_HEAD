@@ -10,10 +10,12 @@ c4b31dcd076d5e845ee445489dcd6d9ec8718366	not-for-merge	branch 'cdc_gated' of htt
 82ad0b3998b0f08acc68dfc1bb4823c94d781437	not-for-merge	branch 'demux_parameters' of https://github.com/pulp-platform/axi
 eb162f4b7a3a4b71d1f7981121cb75a8a5f811c5	not-for-merge	branch 'dwc_fixed' of https://github.com/pulp-platform/axi
 e6bca54c2b36ffd023809d5b99cd15e73f86e99a	not-for-merge	branch 'feature/axil_dw_masked' of https://github.com/pulp-platform/axi
-cb7ce34c9c77f0d41abab2da3363d967dcba8f02	not-for-merge	branch 'feature/multicast-xbar' of https://github.com/pulp-platform/axi
+08794dfbca3f69c3fba706d41fd3c6233de84fea	not-for-merge	branch 'feature/multicast-xbar' of https://github.com/pulp-platform/axi
 55674dafd2573dbc587bd396c1dc56574a97992b	not-for-merge	branch 'fix/full-bw' of https://github.com/pulp-platform/axi
-fce757176da8a19c2f33250fe2360cd396fc5584	not-for-merge	branch 'gh-pages' of https://github.com/pulp-platform/axi
+cd2871dab0328c3100782c90b71be153ae58963e	not-for-merge	branch 'gh-pages' of https://github.com/pulp-platform/axi
 f98105e88a880fc461ff31900820b1d7a9533a67	not-for-merge	branch 'gh-pages-doc' of https://github.com/pulp-platform/axi
+b08e82534789ab710db4f2bb6b66096dbca361b1	not-for-merge	branch 'llc-partition' of https://github.com/pulp-platform/axi
+8828ac1bb18a8f722905ae6ca6f07b6a37d3d6b0	not-for-merge	branch 'lv/axi_scoreboard_minor_fix' of https://github.com/pulp-platform/axi
 f24b1faf7bcf651f1aabdef5e8f99ce2fd817c2e	not-for-merge	branch 'master' of https://github.com/pulp-platform/axi
 dff1de6f48c3588c798e91e78e2f753bc24cf01d	not-for-merge	branch 'mem_interleaved_intf' of https://github.com/pulp-platform/axi
 db19f2c6e143588831875fb1b622fe7cce07d380	not-for-merge	branch 'michaero/detailed_mem' of https://github.com/pulp-platform/axi

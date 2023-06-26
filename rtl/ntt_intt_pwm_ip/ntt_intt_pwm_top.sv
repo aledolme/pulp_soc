@@ -93,6 +93,7 @@ module ntt_intt_pwm_top
         .start_fntt(reg_file_to_ip.ctrl.start_ntt.q),
 		.start_pwm2(reg_file_to_ip.ctrl.start_pwm.q),
 		.start_intt(reg_file_to_ip.ctrl.start_intt.q),
+		.clear(reg_file_to_ip.ctrl.clear.q),
 		.din(din_ntt_intt_pwm),
 		.dout(dout_ntt_intt_pwm),
 		.done(ip_to_reg_file.status)

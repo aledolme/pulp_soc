@@ -13,6 +13,7 @@ entity ntt_intt_pwm is
         read_a,read_b: in std_logic;
         start_ab: in std_logic;
         start_fntt,start_pwm2,start_intt: in std_logic;
+        clear: in std_logic;
         din: in std_logic_vector(31 downto 0);
         dout: out std_logic_vector(31 downto 0);
         done: out std_logic
@@ -118,6 +119,7 @@ architecture RTL of ntt_intt_pwm is
     -------------SIGNALS---------------------------------------------------
     TYPE state IS (IDLE, LOAD, FNTT, INTT, PWM2, READ, WAIT_READ);
     signal y: state;
+    signal reset_or_clear : std_logic;
 
     signal din_cnt : unsigned(7 downto 0);    --counter for OP_LOAD_DATA/B state
     signal din_split_data: integer;
@@ -177,6 +179,8 @@ architecture RTL of ntt_intt_pwm is
 
 begin
 
+    reset_or_clear <= rst or clear;
+
     load_signals <= load_a_f & load_a_i & load_b_f & load_b_i;
     
     load_reg: reg_N_level_rst_n
@@ -187,16 +191,16 @@ begin
         port map(
             D   => load_signals,
             clk => clk,
-            rst => rst,
+            rst => reset_or_clear,
             Q   => load_signals_1
         );
     
     
     
     --FSM----------------------------------------------------------------
-    ntt_intt_FSM: process (clk, rst)
+    ntt_intt_FSM: process (clk, reset_or_clear)
     begin  -- process
-        if rst = '1' then -- asynchronous reset (active high)
+        if reset_or_clear = '1' then -- asynchronous reset (active high)
 
             y <= IDLE;
             PWM_TW <= '0';
@@ -265,10 +269,10 @@ begin
     end process;
     
     
-    dout_cnt_FSM: process (clk, rst, y)
+    dout_cnt_FSM: process (clk, reset_or_clear, y)
     begin  -- process
         if y=IDLE then
-            if rst = '1' then -- asynchronous reset (active high)
+            if reset_or_clear = '1' then -- asynchronous reset (active high)
                 dout_wait <= 1;
                 dout_valid <= '0';
             end if;
@@ -292,9 +296,9 @@ begin
 
 
     ---ntt_intt processes----------------------------------------------------------
-    ntt_intt_1: process (clk, rst)
+    ntt_intt_1: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             load_type <= '0';
         elsif clk'event and clk = '1' then
             if load_signals_1(2) = '1' or load_signals_1(0) = '1' then
@@ -307,9 +311,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_2: process (clk, rst)
+    ntt_intt_2: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             op_out_a <= '0';
         elsif clk'event and clk = '1' then
             if start_fntt = '1' and start_ab = '0' then
@@ -324,9 +328,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_3: process (clk, rst)
+    ntt_intt_3: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             op_out_b <= '0';
         elsif clk'event and clk = '1' then
             if start_fntt = '1' and start_ab = '1' then
@@ -341,9 +345,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_4: process (clk, rst)
+    ntt_intt_4: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             load_ab <= '0';
             read_ab <= '0';
             exec_ab <= '0';
@@ -380,9 +384,9 @@ begin
 
     end process;
 
-    ntt_intt_5: process (clk, rst)
+    ntt_intt_5: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             din_cnt <= (others=>'0');
             --dout_cnt <= "000000001";
             dout_cnt <= "000000000";
@@ -446,9 +450,9 @@ begin
         end if;
     end process;
 
-    ntt_intt_6: process (clk, rst)
+    ntt_intt_6: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             t_r <= (others=>'0');
         elsif clk'event and clk = '1' then
             t_r <= raddr_tw;
@@ -691,9 +695,9 @@ begin
     di1_0 <= di2_0;
     di1_1 <= di2_1;
 
-    ntt_intt9: process(clk, rst)
+    ntt_intt9: process(clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             A   <= (others=>'0');
             B   <= (others=>'0');
             W   <= (others=>'0');
@@ -771,9 +775,9 @@ begin
         end if;
     end process;
     
-    ntt_intt_10: process (clk, rst, done_sig)
+    ntt_intt_10: process (clk, reset_or_clear, done_sig)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             done_sig <= '0';
         elsif clk'event and clk = '1' then
             case y is
@@ -847,7 +851,7 @@ begin
     modmul_module: modmul
         port map(
             clk         => clk,
-            rst         => rst,
+            rst         => reset_or_clear,
             mod_mul_sel => '0',
             mod_mul_A   => barrett_mux_out,
             mod_mul_B   => MONT_std,
@@ -878,9 +882,9 @@ begin
     
     
     
-   ntt_intt_11: process (clk, rst)
+   ntt_intt_11: process (clk, reset_or_clear)
     begin
-        if (rst = '1') then
+        if (reset_or_clear = '1') then
             dout_temp <= (others=>'0');
         elsif clk'event and clk = '1' then
             if y=READ then
@@ -908,7 +912,7 @@ begin
     --------instantiations----------------------------------------------------------
     ntt_intt_ag: address_generator
         port map(
-            rst             => rst,
+            rst             => reset_or_clear,
             clk             => clk,
             start_fntt      => start_fntt,
             start_pwm2      => start_pwm2,
@@ -985,7 +989,7 @@ begin
     ntt_intt_bu: butterfly
         port map(
             clk => clk,
-            rst => rst,
+            rst => reset_or_clear,
             CT  => CT,
             PWM => PWM,
             OP_SEL => op_selector,

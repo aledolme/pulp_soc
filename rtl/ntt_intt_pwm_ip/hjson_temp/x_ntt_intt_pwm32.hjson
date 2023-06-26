@@ -62,6 +62,9 @@
 			{ bits: "9", name: "start_intt",
 				desc: "Make the ntt_intt_pwm starts intt"
             }
+            { bits: "10", name: "clear",
+				desc: "Clear the ntt_intt_pwm"
+            }
         ],
       },
 	{ name: "STATUS"

@@ -44,6 +44,9 @@ package ntt_intt_pwm_reg_pkg;
     struct packed {
       logic        q;
     } start_intt;
+    struct packed {
+      logic        q;
+    } clear;
   } ntt_intt_pwm_reg2hw_ctrl_reg_t;
 
 
@@ -60,8 +63,8 @@ package ntt_intt_pwm_reg_pkg;
   // Register to internal design logic //
   ///////////////////////////////////////
   typedef struct packed {
-    ntt_intt_pwm_reg2hw_din_reg_t din; // [42:11]
-    ntt_intt_pwm_reg2hw_ctrl_reg_t ctrl; // [10:1]
+    ntt_intt_pwm_reg2hw_din_reg_t din; // [43:12]
+    ntt_intt_pwm_reg2hw_ctrl_reg_t ctrl; // [11:1]
   } ntt_intt_pwm_reg2hw_t;
 
   ///////////////////////////////////////

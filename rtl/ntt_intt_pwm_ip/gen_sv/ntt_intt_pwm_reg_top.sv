@@ -88,6 +88,8 @@ module ntt_intt_pwm_reg_top #(
   logic ctrl_start_pwm_we;
   logic ctrl_start_intt_wd;
   logic ctrl_start_intt_we;
+  logic ctrl_clear_wd;
+  logic ctrl_clear_we;
   logic status_qs;
   logic status_re;
 
@@ -386,6 +388,31 @@ module ntt_intt_pwm_reg_top #(
   );
 
 
+  //   F[clear]: 10:10
+  prim_subreg #(
+    .DW      (1),
+    .SWACCESS("WO"),
+    .RESVAL  (1'h0)
+  ) u_ctrl_clear (
+    .clk_i   (clk_i    ),
+    .rst_ni  (rst_ni  ),
+
+    // from register interface
+    .we     (ctrl_clear_we),
+    .wd     (ctrl_clear_wd),
+
+    // from internal hardware
+    .de     (1'b0),
+    .d      ('0  ),
+
+    // to internal hardware
+    .qe     (),
+    .q      (reg2hw.ctrl.clear.q ),
+
+    .qs     ()
+  );
+
+
   // R[status]: V(True)
 
   prim_subreg_ext #(
@@ -459,6 +486,9 @@ module ntt_intt_pwm_reg_top #(
   assign ctrl_start_intt_we = addr_hit[2] & reg_we & ~wr_err;
   assign ctrl_start_intt_wd = reg_wdata[9];
 
+  assign ctrl_clear_we = addr_hit[2] & reg_we & ~wr_err;
+  assign ctrl_clear_wd = reg_wdata[10];
+
   assign status_re = addr_hit[3] && reg_re;
 
   // Read data return
@@ -484,6 +514,7 @@ module ntt_intt_pwm_reg_top #(
         reg_rdata_next[7] = '0;
         reg_rdata_next[8] = '0;
         reg_rdata_next[9] = '0;
+        reg_rdata_next[10] = '0;
       end
 
       addr_hit[3]: begin

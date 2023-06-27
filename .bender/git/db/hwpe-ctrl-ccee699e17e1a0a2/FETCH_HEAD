@@ -2,7 +2,8 @@
 b350681985f9891c31a99d519b25af6014d8017b	not-for-merge	branch 'devel' of https://github.com/pulp-platform/hwpe-ctrl
 0d4e1d006678eb318d48f36382093ceb34fea99d	not-for-merge	branch 'fix_pacakge_imports' of https://github.com/pulp-platform/hwpe-ctrl
 b3848fac03e6c4ef928d71a705ca1d93dc52ddd2	not-for-merge	branch 'fix_timeunit_scope' of https://github.com/pulp-platform/hwpe-ctrl
-d1b1220a8b295d08916b1a28693bd734090af973	not-for-merge	branch 'master' of https://github.com/pulp-platform/hwpe-ctrl
+3d9b9bea7b98df24e6b235408364521a1a27d561	not-for-merge	branch 'flags-uloop-ready' of https://github.com/pulp-platform/hwpe-ctrl
+877d676329785f7bba042402e0a6f329a387573d	not-for-merge	branch 'master' of https://github.com/pulp-platform/hwpe-ctrl
 1b1dfd04ae116badd18c1af4e59a74c5c4a61282	not-for-merge	branch 'more_ops_per_loop' of https://github.com/pulp-platform/hwpe-ctrl
 9ce06b89968c4faa8cb7c6420118c6e0d7c42f1b	not-for-merge	branch 'snitch' of https://github.com/pulp-platform/hwpe-ctrl
 36ce2c4256e621f67e0e15652a0e37859a32042f	not-for-merge	branch 'upstream' of https://github.com/pulp-platform/hwpe-ctrl

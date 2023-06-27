@@ -228,17 +228,17 @@ begin
                     c_loop <= std_logic_vector(unsigned(c_loop) + to_unsigned(1,7));
                     c_pwm <= (others=>'0');
                     c_tw <= std_logic_vector(unsigned(c_tw) + to_unsigned(1,9));
---                    if c_loop(0)='1' then
---                        c_tw <= std_logic_vector(unsigned(c_tw) + to_unsigned(1,9));
---                    else 
---                        c_tw <= c_tw;
---                    end if;
+                --                    if c_loop(0)='1' then
+                --                        c_tw <= std_logic_vector(unsigned(c_tw) + to_unsigned(1,9));
+                --                    else 
+                --                        c_tw <= c_tw;
+                --                    end if;
                 else
                     c_loop <= c_loop;
                     c_pwm <= std_logic_vector(unsigned(c_pwm) + to_unsigned(1,3));
                     c_tw <= c_tw;
                 end if;
-    
+
 
 
             elsif y=INTT then
@@ -339,11 +339,11 @@ begin
             end if;
 
         end if;
-        
+
 
     end process;
-    
-    
+
+
 
 
     --**********************************************************************************************************---
@@ -394,12 +394,12 @@ begin
 
         elsif clk'event and clk = '1' then
             --iterators
-            temp2_a := std_logic_vector(to_unsigned(6,3) - unsigned(c_stage)); --(6-c_stage)
-            temp2_b := std_logic_vector(to_unsigned(7,3) - unsigned(c_stage)); --(7-c_stage)
-            temp2_c := std_logic_vector(to_unsigned(1,3) + unsigned(c_stage)); --(c_stage+1)
+            --temp2_a := std_logic_vector(to_unsigned(6,3) - unsigned(c_stage)); --(6-c_stage)
+            --temp2_b := std_logic_vector(to_unsigned(7,3) - unsigned(c_stage)); --(7-c_stage)
+            --temp2_c := std_logic_vector(to_unsigned(1,3) + unsigned(c_stage)); --(c_stage+1)
             temp2_d := std_logic_vector(to_unsigned(2,3) + unsigned(c_stage)); --(c_stage+2)
             --intermediate variables    
-            temp2_FNTT1 := "0000001";
+            --temp2_FNTT1 := "0000001";
             temp2_INTT1 := "0000001";
             temp2_FNTT2 := "000000" & c_loop(0);
             temp2_INTT2 := "000000" & c_loop(0);
@@ -412,24 +412,44 @@ begin
             elsif y = FNTT then
                 if c_stage = "110" then
                     raddr(6 downto 0) <= c_loop;
+                    temp2_FNTT1 := "0000001";
+                    temp2_FNTT2 := "000000" & c_loop(0);
+                    temp2_FNTT4 := "0" & c_loop(6 downto 1);
+                    temp2_FNTT5 := temp2_FNTT4(5 downto 0) & "0";
                 else
-                    for i in 1 to to_integer(unsigned(temp2_a)) loop
-                        temp2_FNTT1 := temp2_FNTT1(5 downto 0) & '0';--(1<<(6-c_stage))
-                        temp2_FNTT2 := temp2_FNTT2(5 downto 0) & '0'; --(c_loop[0] << (3'd6-c_stage)
-                    end loop;
+                    if c_stage = "101" then
+                        temp2_FNTT1 := "0000010";
+                        temp2_FNTT2 := "00000" & c_loop(0) & "0";
+                        temp2_FNTT4 := "00" & c_loop(6 downto 2);
+                        temp2_FNTT5 := temp2_FNTT4(4 downto 0) & "00";
+                    elsif c_stage = "100" then
+                        temp2_FNTT1 := "0000100";
+                        temp2_FNTT2 := "0000" & c_loop(0) & "00";
+                        temp2_FNTT4 := "000" & c_loop(6 downto 3);
+                        temp2_FNTT5 := temp2_FNTT4(3 downto 0) & "000";
+                    elsif c_stage = "011" then
+                        temp2_FNTT1 := "0001000";
+                        temp2_FNTT2 := "000" & c_loop(0) & "000";
+                        temp2_FNTT4 := "0000" & c_loop(6 downto 4);
+                        temp2_FNTT5 := temp2_FNTT4(2 downto 0) & "0000";
+                    elsif c_stage = "010" then
+                        temp2_FNTT1 := "0010000";
+                        temp2_FNTT2 := "00" & c_loop(0) & "0000";
+                        temp2_FNTT4 := "00000" & c_loop(6 downto 5);
+                        temp2_FNTT5 := temp2_FNTT4(1 downto 0) & "00000";
+                    elsif c_stage = "001" then
+                        temp2_FNTT1 := "0100000";
+                        temp2_FNTT2 := "0" & c_loop(0) & "00000";
+                        temp2_FNTT4 := "000000" & c_loop(6 downto 6);
+                        temp2_FNTT5 := temp2_FNTT4(0 downto 0) & "000000";
+                    else
+                        temp2_FNTT1 := "1000000";
+                        temp2_FNTT2 :=  c_loop(0) & "000000";
+                        temp2_FNTT4 := "0000000";
+                        temp2_FNTT5 := "0000000";
+                    end if;
 
                     temp2_FNTT3 := std_logic_vector(unsigned(temp2_FNTT1)-to_unsigned(1,7));  --(1<<(6-c_stage)-1)
-
-                    for i in 1 to to_integer(unsigned(temp2_b)) loop
-                        temp2_FNTT4 := '0' & temp2_FNTT4(6 downto 1);--((c_loop>>(3'd7-c_stage))
-                    end loop;
-
-                    temp2_FNTT5 := temp2_FNTT4;
-
-                    for i in 1 to to_integer(unsigned(temp2_b)) loop
-                        temp2_FNTT5 := temp2_FNTT5(5 downto 0) & '0' ; --((c_loop>>(3'd7-c_stage)) << (3'd7-c_stage))
-                    end loop;
-
                     temp2_FNTT_sum := (std_logic_vector(unsigned(temp2_FNTT2) + unsigned(temp2_FNTT5)));
                     raddr(6 downto 0) <= std_logic_vector(unsigned(temp2_cloop AND temp2_FNTT3)+ unsigned(temp2_FNTT_sum));
                 end if;
@@ -446,23 +466,47 @@ begin
             elsif y = INTT then
                 if c_stage = "110" then
                     raddr(6 downto 0) <= c_loop;
+                    temp2_INTT1 := "0000000";
+                    temp2_INTT2 := "0000000";
+                    temp2_INTT4 := "0000000";
+                    temp2_INTT5 := "0000000";
                 else
-                    for i in 1 to to_integer(unsigned(temp2_c)) loop
-                        temp2_INTT1 := temp2_INTT1(5 downto 0) & '0';--(1<<(1+c_stage))
-                        temp2_INTT2 := temp2_INTT2(5 downto 0) & '0'; --(c_loop[0] << (1+c_stage)
-                    end loop;
+
+                    if c_stage = "101" then
+                        temp2_INTT1 := "1000000";
+                        temp2_INTT2 :=  c_loop(0) & "000000";
+                        temp2_INTT4 := "0000000";
+                        temp2_INTT5 := "0000000";
+                    elsif c_stage = "100" then
+                        temp2_INTT1 := "0100000";
+                        temp2_INTT2 := "0" & c_loop(0) & "00000";
+                        temp2_INTT4 :=  "000000" & c_loop(6 downto 6);
+                        temp2_INTT5 := temp2_INTT4(0 downto 0) & "000000";
+                    elsif c_stage = "011" then
+                        temp2_INTT1 := "0010000";
+                        temp2_INTT2 :=  "00" & c_loop(0) & "0000";
+                        temp2_INTT4 := "00000" & c_loop(6 downto 5);
+                        temp2_INTT5 := temp2_INTT4(1 downto 0) & "00000";
+                    elsif c_stage = "010" then
+                        temp2_INTT1 := "0001000";
+                        temp2_INTT2 := "000" & c_loop(0) & "000";
+                        temp2_INTT4 := "0000" & c_loop(6 downto 4);
+                        temp2_INTT5 := temp2_INTT4(2 downto 0) & "0000";
+                    elsif c_stage = "001" then
+                        temp2_INTT1 := "0000100";
+                        temp2_INTT2 := "0000" & c_loop(0) & "00";
+                        temp2_INTT4 := "000" & c_loop(6 downto 3);
+                        temp2_INTT5 := temp2_INTT4(3 downto 0) & "000";
+                    else
+                        temp2_INTT1 := "0000010";
+                        temp2_INTT2 := "00000" & c_loop(0) & "0";
+                        temp2_INTT4 := "00" & c_loop(6 downto 2);
+                        temp2_INTT5 := temp2_INTT4(4 downto 0) & "00";
+
+                    end if;
+
 
                     temp2_INTT3 := std_logic_vector(unsigned(temp2_INTT1)-to_unsigned(1,7));  --(1<<(1+c_stage)-1)
-
-                    for i in 1 to to_integer(unsigned(temp2_d)) loop
-                        temp2_INTT4 := '0' & temp2_INTT4(6 downto 1);--((c_loop>>(2+c_stage))
-                    end loop;
-
-                    temp2_INTT5 := temp2_INTT4;
-
-                    for i in 1 to to_integer(unsigned(temp2_d)) loop
-                        temp2_INTT5 := temp2_INTT5(5 downto 0) & '0' ; --((c_loop>>(2+c_stage)) << (2+c_stage))
-                    end loop;
 
                     temp2_INTT_sum := (std_logic_vector(unsigned(temp2_INTT2) + unsigned(temp2_INTT5)));
                     raddr(6 downto 0) <= std_logic_vector(unsigned(temp2_cloop AND temp2_INTT3)+ unsigned(temp2_INTT_sum));
@@ -550,10 +594,7 @@ begin
 
         elsif clk'event and clk = '1' then
 
-            temp5_cloop := '0' & c_loop(6 downto 1);
-            --iterators
-            temp5_a := std_logic_vector(to_unsigned(6,3) - unsigned(c_stage)); --(6-c_stage)
-            temp5_b := std_logic_vector(to_unsigned(7,3) - unsigned(c_stage)); --(7-c_stage)
+            temp5_cloop := '0' & c_loop(6 downto 1);    
             temp5_c := std_logic_vector(to_unsigned(1,3) + unsigned(c_stage)); --(c_stage+1)
             temp5_d := std_logic_vector(to_unsigned(2,3) + unsigned(c_stage)); --(c_stage+2)
             --intermediate variables 
@@ -575,19 +616,35 @@ begin
                 if c_stage = "110" then
                     waddre(6 downto 0) <= c_loop;
                     waddro(6 downto 0) <= c_loop;
+                    temp5_NTT_2 := "0" & c_loop(6 downto 1);
+                    temp5_NTT_1 := "0000001";
+                    temp5_NTT_3 := temp5_NTT_2(6 downto 0);
                 else
-
-                    for i in 1 to to_integer(unsigned(temp5_b)) loop
-                        temp5_NTT_2 := '0' & temp5_NTT_2(6 downto 1); --((c_loop>>(3'd7-c_stage))
-                    end loop;
-
-                    temp5_NTT_3 := temp5_NTT_2;
-
-                    for i in 1 to to_integer(unsigned(temp5_a)) loop
-                        temp5_NTT_3 := temp5_NTT_3(5 downto 0) & '0' ; --((c_loop>>(3'd7-c_stage)) << (3'd6-c_stage))
-                        temp5_NTT_1 := temp5_NTT_1(5 downto 0) & '0';
-                    end loop;
-
+                    if c_stage = "101" then
+                        temp5_NTT_2 := "00" & c_loop(6 downto 2);
+                        temp5_NTT_1 := "0000010";
+                        temp5_NTT_3 := temp5_NTT_2(5 downto 0) & "0";
+                    elsif c_stage = "100" then
+                        temp5_NTT_2 := "000" & c_loop(6 downto 3);
+                        temp5_NTT_3 := temp5_NTT_2(4 downto 0) & "00";
+                        temp5_NTT_1 := "0000100";
+                    elsif c_stage = "011" then
+                        temp5_NTT_2 := "0000" & c_loop(6 downto 4);
+                        temp5_NTT_3 := temp5_NTT_2(3 downto 0) & "000";
+                        temp5_NTT_1 := "0001000";
+                    elsif c_stage = "010" then
+                        temp5_NTT_2 := "00000" & c_loop(6 downto 5);
+                        temp5_NTT_3 := temp5_NTT_2(2 downto 0) & "0000";
+                        temp5_NTT_1 := "0010000";
+                    elsif c_stage = "001" then
+                        temp5_NTT_2 := "000000" & c_loop(6 downto 6);
+                        temp5_NTT_1 := "0100000";
+                        temp5_NTT_3 := temp5_NTT_2(1 downto 0) & "00000";
+                    else
+                        temp5_NTT_2 := "0000000";
+                        temp5_NTT_1 := "1000000";
+                        temp5_NTT_3 := temp5_NTT_2(0 downto 0) & "000000";
+                    end if;
                     waddre(6 downto 0) <= std_logic_vector(unsigned(temp5_cloop) + unsigned(temp5_NTT_3));
                     waddro(6 downto 0) <= std_logic_vector(unsigned(temp5_cloop) + unsigned(temp5_NTT_3) + unsigned(temp5_NTT_1));
 
@@ -599,14 +656,14 @@ begin
 
             elsif y=PWM2 then
                 if c_pwm > "000" and c_pwm < "011" then
-                    temp5_PWM2_1 := "1"; 
+                    temp5_PWM2_1 := "1";
                 else
                     temp5_PWM2_1 := "0";
                 end if;
-               temp5_PWM2_2 := temp5_cloop(5 downto 0) & '0';
+                temp5_PWM2_2 := temp5_cloop(5 downto 0) & '0';
                 waddre(6 downto 0) <= std_logic_vector(unsigned(temp5_PWM2_2) + unsigned(temp5_PWM2_1));
                 waddro(6 downto 0) <= std_logic_vector(unsigned(temp5_PWM2_2) + unsigned(temp5_PWM2_1));
-                
+
                 if c_pwm = "011" then
                     wen <= "1";
                 else
@@ -620,21 +677,40 @@ begin
                 if c_stage = "110" then
                     waddre(6 downto 0) <= c_loop;
                     waddro(6 downto 0) <= c_loop;
+                    temp5_INTT_1 := "0000000";
+                    temp5_INTT_2 := "0000000";
+                    temp5_INTT_3 := "0000000";
                 else
-                    for i in 1 to to_integer(unsigned(temp5_d)) loop
-                        temp5_INTT_2 := '0' & temp5_INTT_2(6 downto 1); --((c_loop>>(2+c_stage))
-                    end loop;
-    
-                    temp5_INTT_3 := temp5_INTT_2;
-    
-                    for i in 1 to to_integer(unsigned(temp5_c)) loop
-                        temp5_INTT_3 := temp5_INTT_3(5 downto 0) & '0' ; --((c_loop>>(2+c_stage)) << (1+c_stage))
-                        temp5_INTT_1 := temp5_INTT_1(5 downto 0) & '0'; --( 1 << (1+c_stage))
-                    end loop;
-    
+                    if c_stage = "101" then
+                       temp5_INTT_1 := "1000000"; 
+                       temp5_INTT_2 := "0000000";
+                       temp5_INTT_3 := temp5_INTT_2(0 downto 0) & "000000";
+                    elsif c_stage = "100" then
+                       temp5_INTT_1 := "0100000";
+                       temp5_INTT_2 := "000000" & c_loop(6 downto 6);
+                       temp5_INTT_3 := temp5_INTT_2(1 downto 0) & "00000";
+                    elsif c_stage = "011" then
+                        temp5_INTT_1 := "0010000";
+                        temp5_INTT_2 := "00000" & c_loop(6 downto 5);
+                        temp5_INTT_3 := temp5_INTT_2(2 downto 0) & "0000";
+                    elsif c_stage = "010" then
+                        temp5_INTT_1 := "0001000";
+                        temp5_INTT_2 := "0000" & c_loop(6 downto 4);
+                        temp5_INTT_3 := temp5_INTT_2(3 downto 0) & "000";
+                    elsif c_stage = "001" then
+                       temp5_INTT_1 := "0000100";
+                       temp5_INTT_2 := "000" & c_loop(6 downto 3);
+                       temp5_INTT_3 := temp5_INTT_2(4 downto 0) & "00";
+                    else
+                        temp5_INTT_1 := "0000010";
+                        temp5_INTT_2 := "00" & c_loop(6 downto 2); --((c_loop>>(2+c_stage))
+                        temp5_INTT_3 := temp5_INTT_2(5 downto 0) & "0";
+                    end if;
+                
+
                     waddre(6 downto 0) <= std_logic_vector(unsigned(temp5_cloop) + unsigned(temp5_INTT_3));
                     waddro(6 downto 0) <= std_logic_vector(unsigned(temp5_cloop) + unsigned(temp5_INTT_3) + unsigned(temp5_INTT_1));
-    
+
                     wen <= "1";
                     brsel(0) <= c_loop(0);
                     brselen <= "1";
@@ -666,7 +742,7 @@ begin
                 else
                     b_ct <= b_ct;
                 end if;
-    
+
                 if y=PWM2 then
                     if c_pwm = "100" then
                         b_pwm <= "1";
@@ -859,7 +935,7 @@ begin
             clk          => clk,
             shiftreg_out => raddr_twd0
         );
-        
+
 
 
 

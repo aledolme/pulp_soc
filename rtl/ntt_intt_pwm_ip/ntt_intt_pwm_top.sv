@@ -4,9 +4,8 @@
 // alessandra.dolmeta@polito.it
 //
 
-
-`include "/register_interface/typedef.svh"
-`include "/register_interface/assign.svh"
+`include "register_interface/typedef.svh"
+`include "register_interface/assign.svh"
 
 module ntt_intt_pwm_top
     	#(

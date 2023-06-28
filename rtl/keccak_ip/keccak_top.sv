@@ -5,8 +5,8 @@
 //
 
 
-`include "/register_interface/typedef.svh"
-`include "/register_interface/assign.svh"
+`include "register_interface/typedef.svh"
+`include "register_interface/assign.svh"
 
 module keccak_top
     	#(
